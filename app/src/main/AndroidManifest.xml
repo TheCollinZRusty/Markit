@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ie.wit">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:name=".markit.ui.ClonMarket.Admin.main.MainApp"
+        android:allowBackup="true"
+        android:icon="@drawable/markitlogo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/markitlogo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCQM1-jjT6ihw9XgWfYLbcbGjnIFpg12qU" />
+
+
+        <activity android:name=".markit.ui.ClonMarket.activities.UserMainActivity" />
+        <activity android:name=".AdminFragment.AdminActivity" />
+        <activity android:name=".markit.ui.ClonMarket.activities.LoginActivity" />
+        <activity android:name=".markit.ui.ClonMarket.activities.InitialScreen" />
+        <activity
+            android:name=".markit.ui.ClonMarket.activities.SplashScreen"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundgradient"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/splash_logo"
+        android:layout_width="150dp"
+        app:srcCompat="@drawable/markitlogo"
+        android:layout_height="150dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
+        android:drawablePadding="6dp"
+        android:gravity="center_horizontal"
+        android:padding="4dp"
+        android:text="Markit"
+        android:textColor="#FFFEFE"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"/>
+
+    <Button
+        android:id="@+id/JumploginButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="15dp"
+        android:paddingTop="15dp"
+        android:shadowColor="@android:color/transparent"
+        android:text="Enter" />
+
+    <Button
+        android:id="@+id/JumpSignUpButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="110dp"
+        android:padding="15dp"
+        android:shadowColor="@android:color/transparent"
+        android:text="Sign in as Admin?"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawablePadding="6dp"
+        android:gravity="center_horizontal"
+        android:padding="4dp"
+        android:text="Welcome to the Clonakilty Farmers market App"
+        android:textColor="#444444" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:drawablePadding="6dp"
+        android:gravity="bottom|center_horizontal"
+        android:padding="4dp"
+        android:paddingBottom="10dp"
+        android:text="Developed by Owen Collins for Mobile App Development 2 SSD3 2020"
+        android:textColor="#444444" />
+
+</LinearLayout>

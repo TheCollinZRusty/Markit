@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="58cea6db-a901-4f5b-9fa5-75eb23debece" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../delete-web.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/ClonMarket/Main/ClonTraderApp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/ClonMarket/Models/ClonTraderMemStore.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/ClonMarket/Models/ClonTraderModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/ClonMarket/Models/ClonTraderStore.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/ClonMarket/adapters/ClonTraderAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/ClonMarket/ui/ClonTrader/ClonTraderFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/ClonMarket/ui/ClonTraderAdd/ClonTraderAddFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/ic_menu_aboutus.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/ic_menu_donate.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/ic_menu_manage.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/ic_menu_report.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/ic_menu_send.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/ic_menu_share.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable-v24/drawable/side_nav_bar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../drawable/delete_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../layout/card_trader.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../layout/fragment_clon_add_trader.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../layout/fragment_clon_trader.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../menu/home_drawer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../menu/menu/home.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delete.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delete_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-anydpi-v26/ic_launcher_homer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-anydpi-v26/ic_launcher_homer_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-hdpi/ic_launcher_homer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-hdpi/ic_launcher_homer_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-hdpi/ic_launcher_homer_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-mdpi/ic_launcher_homer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-mdpi/ic_launcher_homer_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-mdpi/ic_launcher_homer_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xhdpi/ic_launcher_homer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xhdpi/ic_launcher_homer_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xhdpi/ic_launcher_homer_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxhdpi/ic_launcher_homer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxhdpi/ic_launcher_homer_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxhdpi/ic_launcher_homer_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxxhdpi/ic_launcher_homer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxxhdpi/ic_launcher_homer_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxxhdpi/ic_launcher_homer_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-hdpi/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-hdpi/delete_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-hdpi/delete_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-mdpi/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-mdpi/delete_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-mdpi/delete_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xhdpi/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xhdpi/delete_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xhdpi/delete_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xxhdpi/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xxhdpi/delete_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xxhdpi/delete_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xxxhdpi/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xxxhdpi/delete_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mipmap-xxxhdpi/delete_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../navigation/navigation/mobile_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/ie/wit/markit/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/ie/wit/markit/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/gallery/GalleryFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/gallery/GalleryViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/home/HomeFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/ie/wit/markit/ui/home/HomeViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drawable-v24/SkibMarket.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/main_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/app_bar_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/app_bar_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/content_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/content_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/fragment_gallery.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/fragment_home.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/nav_header_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/nav_header_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../menu/activity_main_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../menu/menu/home_drawer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../menu/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../menu/home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../navigation/mobile_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../values/strings.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="976" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="58cea6db-a901-4f5b-9fa5-75eb23debece" name="Default Changelist" comment="" />
+      <created>1580849889675</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580849889675</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.32982087" />
+      <window_info id="Structure" side_tool="true" />
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="Resources Explorer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Palette&#9;" />
+    </layout>
+  </component>
+</project>

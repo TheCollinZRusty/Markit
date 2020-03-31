@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_clon_about_us">
+
+    <fragment
+        android:id="@+id/nav_clon_trader"
+        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonTrader.ClonTraderFragment"
+        android:label="@string/menu_view_trader"
+        tools:layout="@layout/fragment_clon_trader" />
+    <fragment
+        android:id="@+id/nav_Location"
+        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonLocation.ClonLocation"
+        android:label="@string/menu_view_trader"
+        tools:layout="@layout/fragment_clon_trader" />
+    <fragment
+        android:id="@+id/nav_clon_about_us"
+        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonAboutUs.ClonLocation"
+        android:label="@string/menu_view_trader"
+        tools:layout="@layout/fragment_clon_trader" />
+
+</navigation>
