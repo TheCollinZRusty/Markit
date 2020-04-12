@@ -1,7 +1,7 @@
 
 // https://github.com/kitek/android-rv-swipe-delete
 
-package ie.wit.utils
+package ie.wit.AdminFragment
 
 import android.content.Context
 import android.graphics.*

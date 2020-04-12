@@ -1,4 +1,4 @@
-package ie.wit.markit.ui.ClonMarket.Admin.helpers
+package ie.wit.AdminFragment
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +7,14 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.wit.R
-import ie.wit.markit.ui.ClonMarket.Admin.models.ClonTraderModel
-import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.card_trader.view.*
 
-interface ClickListener {
-    fun click(clonTrader: ClonTraderModel)
+interface TraderListener {
+    fun onTraderClick(clonTrader: ClonTraderModel)
 }
 
 class traderAdapter constructor(var clonTraders: ArrayList<ClonTraderModel>,
-                                private val listener: ClickListener, reportall : Boolean)
+                                private val listener: TraderListener, reportall : Boolean)
     : RecyclerView.Adapter<traderAdapter.MainHolder>() {
 
     val reportAll = reportall
@@ -33,7 +31,7 @@ class traderAdapter constructor(var clonTraders: ArrayList<ClonTraderModel>,
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val trader = clonTraders[holder.adapterPosition]
-        holder.bind(trader, listener, reportAll)
+        holder.bind(trader,listener,reportAll)
     }
 
     override fun getItemCount(): Int = clonTraders.size
@@ -45,21 +43,26 @@ class traderAdapter constructor(var clonTraders: ArrayList<ClonTraderModel>,
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(clonTrader: ClonTraderModel, listener: ClickListener, reportAll: Boolean) {
+        fun bind(clonTrader: ClonTraderModel, listener: TraderListener, reportAll: Boolean) {
             itemView.tag = clonTrader
-            itemView.title.text = clonTrader.Name
-            itemView.Description.text = clonTrader.Description
+            itemView.viewTitle.text = clonTrader.Title
+            itemView.viewDescription.text = clonTrader.Description
+            itemView.viewNumber.text = clonTrader.Number
+            itemView.viewEmail.text = clonTrader.TraderEmail
+            itemView.viewStart.text = clonTrader.TraderStart
+            itemView.viewEnd.text = clonTrader.TraderEnd
 
-            if (!reportAll)
-                itemView.setOnClickListener { listener.click(clonTrader) }
+            if(!reportAll)
+                itemView.setOnClickListener { listener.onTraderClick(clonTrader) }
 
-            if (!clonTrader.profilepic.isEmpty()) {
+            if(!clonTrader.profilepic.isEmpty()) {
                 Picasso.get().load(clonTrader.profilepic.toUri())
                     //.resize(180, 180)
-                    .transform(CropCircleTransformation())
+//                    .transform(CropCircleTransformation())
                     .into(itemView.imageIcon)
-            } else
-                itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            }
+            else
+                itemView.imageIcon.setImageResource(R.mipmap.ic_launcher)
         }
     }
 }

@@ -1,4 +1,4 @@
-package ie.wit.markit.ui.ClonMarket.Admin.models
+package ie.wit.AdminFragment
 
 import android.os.Parcelable
 import com.google.firebase.database.Exclude

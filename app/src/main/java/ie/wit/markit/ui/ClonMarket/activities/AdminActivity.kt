@@ -37,10 +37,7 @@ class AdminActivity : AppCompatActivity(),
         setContentView(R.layout.admin_activity)
 //        setSupportActionBar(toolbar)
         app = application as MainApp
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action",
-                Snackbar.LENGTH_LONG).setAction("Action", null).show()
-        }
+
 
         navView.setNavigationItemSelectedListener(this)
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -73,6 +70,12 @@ class AdminActivity : AppCompatActivity(),
                 navigateTo(ViewTraderFragment.newInstance())
             R.id.nav_report_all ->
                 navigateTo(ViewTraderAllFragment.newInstance())
+            R.id.nav_add_post ->
+                navigateTo(AddPostFragment.newInstance())
+            R.id.nav_view_post ->
+                navigateTo(ViewMyPostsFragment.newInstance())
+            R.id.nav_view_all_posts ->
+                navigateTo(ViewAllPostsFragment.newInstance())
             R.id.nav_sign_out -> signOut()
 
             else -> toast("You Selected Something Else")

@@ -12,11 +12,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import kotlinx.android.synthetic.main.fragment_trader_edit.view.*
+import kotlinx.android.synthetic.main.fragment_edit_post.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class EditTraderFragment : Fragment(), AnkoLogger {
+class EditPostsFragment : Fragment(), AnkoLogger {
 
     lateinit var app: MainApp
     lateinit var loader : AlertDialog
@@ -37,26 +37,21 @@ class EditTraderFragment : Fragment(), AnkoLogger {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_trader_edit, container, false)
-        activity?.title = getString(R.string.action_edit_trader)
+        root = inflater.inflate(R.layout.fragment_edit_post, container, false)
+        activity?.title = getString(R.string.action_edit)
         loader = createLoader(activity!!)
 
-        root.EditTraderTitle.setText(editClonTrader!!.Title)
-        root.EditTraderDesc.setText(editClonTrader!!.Description)
-        root.EditTraderNumber.setText(editClonTrader!!.Number)
-        root.EditTraderEmail.setText(editClonTrader!!.TraderEmail)
-        root.EditTraderStart.setText(editClonTrader!!.TraderStart)
-        root.EditTraderEnd.setText(editClonTrader!!.TraderEnd)
-
-
+        root.editName.setText(editClonTrader!!.Name)
+        root.editDescription.setText(editClonTrader!!.PostBody)
+        root.editName.setText(editClonTrader!!.Number)
 //        root.editMessage.setText(editClonTrader!!.message)
 //        root.editUpvotes.setText(editClonTrader!!.upvotes.toString())
 
-        root.btnEdit.setOnClickListener {
+        root.editUpdateButton.setOnClickListener {
             showLoader(loader, "Updating Donation on Server...")
-            updateTraderData()
-            updateTrader(editClonTrader!!.uid, editClonTrader!!)
-            updateUsersTrader(app.auth.currentUser!!.uid,
+            updateDonationData()
+            updateDonation(editClonTrader!!.uid, editClonTrader!!)
+            updateUserDonation(app.auth.currentUser!!.uid,
                                editClonTrader!!.uid, editClonTrader!!)
         }
 
@@ -66,31 +61,29 @@ class EditTraderFragment : Fragment(), AnkoLogger {
     companion object {
         @JvmStatic
         fun newInstance(clonTrader: ClonTraderModel) =
-            EditTraderFragment().apply {
+            EditPostsFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable("editdonation",clonTrader)
                 }
             }
     }
 
-    fun updateTraderData() {
-        editClonTrader!!.Title = root.EditTraderTitle.text.toString()
-        editClonTrader!!.Description = root.EditTraderDesc.text.toString()
-        editClonTrader!!.Number = root.EditTraderNumber.text.toString()
-        editClonTrader!!.TraderEmail = root.EditTraderEmail.text.toString()
-        editClonTrader!!.TraderStart = root.EditTraderStart.text.toString()
-        editClonTrader!!.TraderEnd = root.EditTraderEnd.text.toString()
-//        editClonTrader!!.Upvotes = root.editUpvotes.text.toString().toInt()
+    fun updateDonationData() {
+        editClonTrader!!.Name = root.editName.text.toString()
+        editClonTrader!!.PostBody = root.editDescription.text.toString()
+        editClonTrader!!.Number = root.editNumber.text.toString()
+//        editClonTrader!!.message = root.editMessage.text.toString()
+//        editClonTrader!!.upvotes = root.editUpvotes.text.toString().toInt()
     }
 
-    fun updateUsersTrader(userId: String, uid: String?, clonTrader: ClonTraderModel) {
+    fun updateUserDonation(userId: String, uid: String?, clonTrader: ClonTraderModel) {
         app.database.child("user-traders").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.setValue(clonTrader)
                         activity!!.supportFragmentManager.beginTransaction()
-                        .replace(R.id.homeFrame, ViewTraderFragment.newInstance())
+                        .replace(R.id.homeFrame, ViewMyPostsFragment.newInstance())
                         .addToBackStack(null)
                         .commit()
                         hideLoader(loader)
@@ -102,7 +95,7 @@ class EditTraderFragment : Fragment(), AnkoLogger {
                 })
     }
 
-    fun updateTrader(uid: String?, clonTrader: ClonTraderModel) {
+    fun updateDonation(uid: String?, clonTrader: ClonTraderModel) {
         app.database.child("traders").child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {

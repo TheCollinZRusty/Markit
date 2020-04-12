@@ -22,10 +22,6 @@ import com.google.firebase.storage.FirebaseStorage
 import ie.wit.AdminFragment.AdminActivity
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import ie.wit.markit.ui.ClonMarket.Admin.utils.createLoader
-import ie.wit.markit.ui.ClonMarket.Admin.utils.hideLoader
-import ie.wit.markit.ui.ClonMarket.Admin.utils.showLoader
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.detail
 import kotlinx.android.synthetic.main.activity_login.emailCreateAccountButton
 import kotlinx.android.synthetic.main.activity_login.emailPasswordButtons

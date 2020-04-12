@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.wit.R
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.card_trader.view.*
+import kotlinx.android.synthetic.main.card_feed.view.*
 
-interface DonationListener {
+interface PostListener {
     fun onDonationClick(clonTrader: ClonTraderModel)
 }
 
-class traderAdapter constructor(var clonTraders: ArrayList<ClonTraderModel>,
-                                private val listener: DonationListener, reportall : Boolean)
-    : RecyclerView.Adapter<traderAdapter.MainHolder>() {
+class feedAdapter constructor(var clonPosts: ArrayList<ClonTraderModel>,
+                                private val listener: PostListener, reportall : Boolean)
+    : RecyclerView.Adapter<feedAdapter.MainHolder>() {
 
     val reportAll = reportall
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(
             LayoutInflater.from(parent?.context).inflate(
-                R.layout.card_trader,
+                R.layout.card_feed,
                 parent,
                 false
             )
@@ -31,23 +31,23 @@ class traderAdapter constructor(var clonTraders: ArrayList<ClonTraderModel>,
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val trader = clonTraders[holder.adapterPosition]
+        val trader = clonPosts[holder.adapterPosition]
         holder.bind(trader,listener,reportAll)
     }
 
-    override fun getItemCount(): Int = clonTraders.size
+    override fun getItemCount(): Int = clonPosts.size
 
     fun removeAt(position: Int) {
-        clonTraders.removeAt(position)
+        clonPosts.removeAt(position)
         notifyItemRemoved(position)
     }
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(clonTrader: ClonTraderModel, listener: DonationListener, reportAll: Boolean) {
+        fun bind(clonTrader: ClonTraderModel, listener: PostListener, reportAll: Boolean) {
             itemView.tag = clonTrader
-            itemView.title.text = clonTrader.Name
-            itemView.Description.text = clonTrader.Description
+            itemView.name.text = clonTrader.Title
+            itemView.Description.text = clonTrader.PostBody
 
             if(!reportAll)
                 itemView.setOnClickListener { listener.onDonationClick(clonTrader) }
@@ -59,7 +59,7 @@ class traderAdapter constructor(var clonTraders: ArrayList<ClonTraderModel>,
                     .into(itemView.imageIcon)
             }
             else
-                itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+                itemView.imageIcon.setImageResource(R.mipmap.ic_launcher)
         }
     }
 }

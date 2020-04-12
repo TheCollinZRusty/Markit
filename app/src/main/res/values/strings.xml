@@ -36,6 +36,7 @@
 
     <string name="menu_report_all">View All Traders</string>
     <string name="action_report">Report</string>
+    <string name="action_edit">Edit post</string>
     <!-- START Firebase Resources-->
 
     <string name="label_emailpassword">Email/Password Authentication</string>

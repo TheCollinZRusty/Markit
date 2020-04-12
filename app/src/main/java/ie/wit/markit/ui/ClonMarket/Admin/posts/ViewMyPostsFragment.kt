@@ -17,12 +17,12 @@ import com.google.firebase.database.ValueEventListener
 
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import kotlinx.android.synthetic.main.fragment_view_traders.view.*
+import kotlinx.android.synthetic.main.fragment_view_posts.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-open class ViewTraderFragment : Fragment(), AnkoLogger,
-    TraderListener {
+open class ViewMyPostsFragment : Fragment(), AnkoLogger,
+    PostListener {
 
     lateinit var app: MainApp
     lateinit var loader : AlertDialog
@@ -38,14 +38,15 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_view_traders, container, false)
+        root = inflater.inflate(R.layout.fragment_view_posts, container, false)
         activity?.title = getString(R.string.action_report)
+
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
         setSwipeRefresh()
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = root.recyclerView.adapter as traderAdapter
+                val adapter = root.recyclerView.adapter as feedAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 deleteDonation((viewHolder.itemView.tag as ClonTraderModel).uid)
                 deleteUserDonation(app.auth.currentUser!!.uid,
@@ -57,7 +58,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
 
         val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onTraderClick(viewHolder.itemView.tag as ClonTraderModel)
+                onDonationClick(viewHolder.itemView.tag as ClonTraderModel)
             }
         }
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
@@ -65,24 +66,28 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
 
         return root
     }
+
     companion object {
         @JvmStatic
         fun newInstance() =
-            ViewTraderFragment().apply {
+            ViewMyPostsFragment().apply {
                 arguments = Bundle().apply { }
             }
     }
+
     open fun setSwipeRefresh() {
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllTrader(app.auth.currentUser!!.uid)
+                getAllDonations(app.auth.currentUser!!.uid)
             }
         })
     }
+
     fun checkSwipeRefresh() {
         if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
     }
+
     fun deleteUserDonation(userId: String, uid: String?) {
         app.database.child("user-traders").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
@@ -95,6 +100,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
                     }
                 })
     }
+
     fun deleteDonation(uid: String?) {
         app.database.child("traders").child(uid!!)
             .addListenerForSingleValueEvent(
@@ -102,23 +108,27 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.removeValue()
                     }
+
                     override fun onCancelled(error: DatabaseError) {
                         info("Firebase Donation error : ${error.message}")
                     }
                 })
     }
-    override fun onTraderClick(clonTrader: ClonTraderModel) {
+
+    override fun onDonationClick(clonTrader: ClonTraderModel) {
         activity!!.supportFragmentManager.beginTransaction()
-            .replace(R.id.homeFrame, EditTraderFragment.newInstance(clonTrader))
+            .replace(R.id.homeFrame, EditPostsFragment.newInstance(clonTrader))
             .addToBackStack(null)
             .commit()
     }
+
     override fun onResume() {
         super.onResume()
-        if(this::class == ViewTraderFragment::class)
-            getAllTrader(app.auth.currentUser!!.uid)
+        if(this::class == ViewMyPostsFragment::class)
+            getAllDonations(app.auth.currentUser!!.uid)
     }
-    fun getAllTrader(userId: String?) {
+
+    fun getAllDonations(userId: String?) {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading Donations from Firebase")
         val donationsList = ArrayList<ClonTraderModel>()
@@ -127,21 +137,24 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
                 override fun onCancelled(error: DatabaseError) {
                     info("Firebase Donation error : ${error.message}")
                 }
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     hideLoader(loader)
                     val children = snapshot.children
                     children.forEach {
                         val donation = it.
                             getValue<ClonTraderModel>(ClonTraderModel::class.java)
+
                         donationsList.add(donation!!)
                         root.recyclerView.adapter =
-                            traderAdapter(
+                            feedAdapter(
                                 donationsList,
-                                this@ViewTraderFragment,
+                                this@ViewMyPostsFragment,
                                 false
                             )
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
+
                         app.database.child("user-traders").child(userId)
                             .removeEventListener(this)
                     }

@@ -11,13 +11,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import kotlinx.android.synthetic.main.fragment_add_trader.view.*
+import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.HashMap
 
 
-class AddTraderFragment : Fragment(), AnkoLogger {
+class AddPostFragment : Fragment(), AnkoLogger {
 
     lateinit var app: MainApp
     var totalDonated = 0
@@ -34,7 +34,7 @@ class AddTraderFragment : Fragment(), AnkoLogger {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_add_trader, container, false)
+        val root = inflater.inflate(R.layout.fragment_add_post, container, false)
         loader = createLoader(activity!!)
         activity?.title = getString(R.string.action_add_trader)
 
@@ -46,22 +46,17 @@ class AddTraderFragment : Fragment(), AnkoLogger {
     companion object {
         @JvmStatic
         fun newInstance() =
-            AddTraderFragment().apply {
+            AddPostFragment().apply {
                 arguments = Bundle().apply {}
             }
     }
 
     fun setButtonListener(layout: View) {
-        layout.btnAdd.setOnClickListener {
-            val title = layout.traderTitle.text.toString()
-            val description = layout.traderDesc.text.toString()
-            val number = layout.traderNumber.text.toString()
-            val traderemail = layout.traderEmail.text.toString()
-            val traderstart = layout.traderStart.text.toString()
-            val traderend = layout.traderEnd.text.toString()
+        layout.AddButton.setOnClickListener {
+            val description = layout.Description.text.toString()
             writeNewTrader(
                 ClonTraderModel(
-                    Title = title, Description = description, Number = number,TraderEmail = traderemail, TraderStart = traderstart, TraderEnd = traderend,
+                    PostBody = description,
                     profilepic = app.userImage.toString(),
                     email = app.auth.currentUser?.email
                 )
@@ -83,7 +78,7 @@ class AddTraderFragment : Fragment(), AnkoLogger {
     }
 
     fun writeNewTrader(clonTrader: ClonTraderModel) {
-//         Create new clonTrader at /clonTraders & /clonTraders/$uid
+//         Create new clonTrader at /clonPosts & /clonPosts/$uid
         showLoader(loader, "Adding Donation to Firebase")
         info("Firebase DB Reference : $app.database")
         val uid = app.auth.currentUser!!.uid

@@ -1,4 +1,4 @@
-package ie.wit.markit.ui.ClonMarket.Admin.models
+package ie.wit.AdminFragment
 
 import android.os.Parcelable
 import com.google.firebase.database.Exclude
@@ -10,11 +10,15 @@ import kotlinx.android.parcel.Parcelize
 data class ClonTraderModel(
     var uid: String? = "",
     var paymenttype: String = "N/A",
-    var Name: String = "",
+    var Title: String = "",
     var Description: String = "",
     var Number: String = "",
-    var message: String = "a message",
-    var upvotes: Int = 0,
+    var TraderEmail: String = "",
+    var TraderStart: String = "",
+    var TraderEnd: String = "a message",
+    var Name: String = "",
+    var PostBody: String = "",
+    var Upvotes: Int = 0,
     var profilepic: String = "",
     var email: String? = "joe@bloggs.com")
     : Parcelable
@@ -23,13 +27,21 @@ data class ClonTraderModel(
     fun toMap(): Map<String, Any?> {
         return mapOf(
             "uid" to uid,
+            "Title" to Title,
             "Name" to Name,
+            "PostBody" to PostBody,
             "Description" to Description,
             "Number" to Number,
-            "message" to message,
-            "upvotes" to upvotes,
+            "TraderEmail" to TraderEmail,
+            "TraderStart" to TraderStart,
+            "TraderEnd" to TraderEnd,
+//            "message" to message,
+            "upvotes" to Upvotes,
             "profilepic" to profilepic,
             "email" to email
         )
     }
 }
+
+
+

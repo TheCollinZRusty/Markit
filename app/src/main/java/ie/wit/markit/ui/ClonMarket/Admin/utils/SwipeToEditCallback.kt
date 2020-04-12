@@ -1,4 +1,4 @@
-package ie.wit.utils
+package ie.wit.AdminFragment
 
 import android.content.Context
 import android.graphics.*
@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.R
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 
 abstract class SwipeToEditCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 

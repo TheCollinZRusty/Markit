@@ -12,18 +12,18 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 import ie.wit.R
-import kotlinx.android.synthetic.main.fragment_view_traders.view.*
+import kotlinx.android.synthetic.main.fragment_view_posts.view.*
 import org.jetbrains.anko.info
 
-class ViewTraderAllFragment : ViewTraderFragment(),
-    TraderListener {
+class ViewAllPostsFragment : ViewMyPostsFragment(),
+    PostListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_view_traders, container, false)
+        root = inflater.inflate(R.layout.fragment_view_posts, container, false)
         activity?.title = getString(R.string.menu_report_all)
 
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
@@ -35,7 +35,7 @@ class ViewTraderAllFragment : ViewTraderFragment(),
     companion object {
         @JvmStatic
         fun newInstance() =
-            ViewTraderAllFragment().apply {
+            ViewAllPostsFragment().apply {
                 arguments = Bundle().apply { }
             }
     }
@@ -44,17 +44,17 @@ class ViewTraderAllFragment : ViewTraderFragment(),
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllUserTraders()
+                getAllUsersDonations()
             }
         })
     }
 
     override fun onResume() {
         super.onResume()
-        getAllUserTraders()
+        getAllUsersDonations()
     }
 
-    fun getAllUserTraders() {
+    fun getAllUsersDonations() {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading All Users Donations from Firebase")
         val traderList = ArrayList<ClonTraderModel>()
@@ -73,9 +73,9 @@ class ViewTraderAllFragment : ViewTraderFragment(),
 
                         traderList.add(trader!!)
                         root.recyclerView.adapter =
-                            traderAdapter(
+                            feedAdapter(
                                 traderList,
-                                this@ViewTraderAllFragment,
+                                this@ViewAllPostsFragment,
                                 true
                             )
                         root.recyclerView.adapter?.notifyDataSetChanged()

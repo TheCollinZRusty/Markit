@@ -25,8 +25,7 @@ class ClonTraderFragment : Fragment() {
     ): View? {
         var root = inflater.inflate(R.layout.fragment_clon_trader, container, false)
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        root.recyclerView.adapter =
-//            TraderViewAdapter(app.traders.findAll())
+//        root.recyclerView.adapter = TraderAdapter(app.clonTraders.findAll())
         return root
     }
 }
