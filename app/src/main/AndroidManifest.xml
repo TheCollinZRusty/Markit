@@ -26,7 +26,8 @@
 
         <activity android:name=".markit.ui.ClonMarket.activities.UserMainActivity" />
         <activity android:name=".AdminFragment.AdminActivity" />
-        <activity android:name=".markit.ui.ClonMarket.activities.LoginActivity" />
+        <activity android:name=".markit.ui.ClonMarket.activities.LoginTraderActivity" />
+        <activity android:name=".markit.ui.ClonMarket.activities.LoginUserActivity" />
         <activity android:name=".markit.ui.ClonMarket.activities.InitialScreen" />
         <activity
             android:name=".markit.ui.ClonMarket.activities.SplashScreen"

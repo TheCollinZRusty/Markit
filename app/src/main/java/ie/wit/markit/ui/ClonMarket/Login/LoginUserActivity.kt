@@ -1,4 +1,4 @@
-package ie.wit.AdminFragment
+package ie.wit.markit.ui.ClonMarket.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,13 +19,26 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-//import com.google.firebase.quickstart.auth.R
+import ie.wit.AdminFragment.AdminActivity
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
+import kotlinx.android.synthetic.main.activity_login.detail
+import kotlinx.android.synthetic.main.activity_login.emailCreateAccountButton
+import kotlinx.android.synthetic.main.activity_login.emailPasswordButtons
+import kotlinx.android.synthetic.main.activity_login.emailPasswordFields
+import kotlinx.android.synthetic.main.activity_login.emailSignInButton
+import kotlinx.android.synthetic.main.activity_login.fieldEmail
+import kotlinx.android.synthetic.main.activity_login.fieldPassword
+import kotlinx.android.synthetic.main.activity_login.main_layout
+import kotlinx.android.synthetic.main.activity_login.signOutButton
+import kotlinx.android.synthetic.main.activity_login.signedInButtons
+import kotlinx.android.synthetic.main.activity_login.status
+import kotlinx.android.synthetic.main.activity_login.verifyEmailButton
 import kotlinx.android.synthetic.main.login.*
 import org.jetbrains.anko.startActivity
 
-class Login : AppCompatActivity(), View.OnClickListener {
+
+class LoginUserActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var app: MainApp
     lateinit var loader : AlertDialog
@@ -54,7 +67,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
         app.googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        loader = createLoader(this)
+        loader = ie.wit.AdminFragment.createLoader(this)
 
         sign_in_button.setSize(SignInButton.SIZE_WIDE)
         sign_in_button.setColorScheme(0)
@@ -75,7 +88,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        showLoader(loader, "Creating Account...")
+        ie.wit.AdminFragment.showLoader(loader, "Creating Account...")
         // [START create_user_with_email]
         app.auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -92,7 +105,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
                     updateUI(null)
                 }
                 // [START_EXCLUDE]
-                hideLoader(loader)
+                ie.wit.AdminFragment.hideLoader(loader)
                 // [END_EXCLUDE]
             }
         // [END create_user_with_email]
@@ -103,7 +116,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
         if (!validateForm()) {
             return
         }
-        showLoader(loader, "Logging In...")
+        ie.wit.AdminFragment.showLoader(loader, "Logging In...")
         // [START sign_in_with_email]
         app.auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -123,7 +136,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 if (!task.isSuccessful) {
                     status.setText(R.string.auth_failed)
                 }
-                hideLoader(loader)
+                ie.wit.AdminFragment.hideLoader(loader)
                 // [END_EXCLUDE]
             }
         // [END sign_in_with_email]
@@ -186,7 +199,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        hideLoader(loader)
+        ie.wit.AdminFragment.hideLoader(loader)
         if (user != null) {
             status.text = getString(R.string.emailpassword_status_fmt,
                 user.email, user.isEmailVerified)
@@ -200,7 +213,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
             app.database = FirebaseDatabase.getInstance().reference
             app.storage = FirebaseStorage.getInstance().reference
 
-            startActivity<AdminActivity>()
+            startActivity<UserMainActivity>()
         } else {
             status.setText(R.string.signed_out)
             detail.text = null
@@ -261,7 +274,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
         // [START_EXCLUDE silent]
-        showLoader(loader, "Logging In with Google...")
+        ie.wit.AdminFragment.showLoader(loader, "Logging In with Google...")
         // [END_EXCLUDE]
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
@@ -280,7 +293,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 }
 
                 // [START_EXCLUDE]
-                hideLoader(loader)
+                ie.wit.AdminFragment.hideLoader(loader)
                 // [END_EXCLUDE]
             }
     }

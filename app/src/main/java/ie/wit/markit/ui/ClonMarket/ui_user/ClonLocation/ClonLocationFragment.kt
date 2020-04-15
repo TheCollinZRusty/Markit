@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
+import ie.wit.AdminFragment.ViewTraderAllFragment
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 
-class ClonLocation : Fragment() {
+class ClonLocationFragment : Fragment() {
 
     private lateinit var Map: GoogleMap
     lateinit var app: MainApp
@@ -25,6 +26,13 @@ class ClonLocation : Fragment() {
         root = inflater.inflate(R.layout.fragment_clon_location, container, false)
         activity?.title = getString(R.string.action_add_trader)
         return root;
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            ClonLocationFragment().apply {
+                arguments = Bundle().apply { }
+            }
     }
 }
 

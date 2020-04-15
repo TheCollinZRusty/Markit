@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/nav_clon_trader"
-        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonTrader.ClonTraderFragment"
+        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonPosts.ClonPostsFragment"
         android:label="@string/menu_view_trader"
         tools:layout="@layout/fragment_clon_trader" />
     <fragment
         android:id="@+id/nav_Location"
-        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonLocation.ClonLocation"
+        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonLocation.ClonLocationFragment"
         android:label="@string/menu_view_trader"
         tools:layout="@layout/fragment_clon_trader" />
     <fragment

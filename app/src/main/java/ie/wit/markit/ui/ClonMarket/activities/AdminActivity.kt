@@ -13,7 +13,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import ie.wit.markit.ui.ClonMarket.activities.LoginActivity
+import ie.wit.markit.ui.ClonMarket.activities.LoginTraderActivity
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.admin_activity.*
 import kotlinx.android.synthetic.main.app_bar_home.toolbar
@@ -96,7 +96,7 @@ class AdminActivity : AppCompatActivity(),
     private fun signOut() {
         app.googleSignInClient.signOut().addOnCompleteListener(this) {
             app.auth.signOut()
-            startActivity<LoginActivity>()
+            startActivity<LoginTraderActivity>()
             finish()
         }
     }

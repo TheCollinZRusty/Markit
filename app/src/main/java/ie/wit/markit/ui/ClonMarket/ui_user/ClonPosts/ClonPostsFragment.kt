@@ -1,8 +1,6 @@
-package ie.wit.markit.ui.ClonMarket.ui_user.ClonTrader
+package ie.wit.markit.ui.ClonMarket.ui_user.ClonPosts
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.fragment_clon_trader.view.recyclerView
-import kotlinx.android.synthetic.main.fragment_view_posts.view.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +10,20 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.AdminFragment.*
+
 import ie.wit.R
-import kotlinx.android.synthetic.main.fragment_view_traders.view.*
+import kotlinx.android.synthetic.main.fragment_view_posts.view.*
 import org.jetbrains.anko.info
 
-class ClonTraderFragment : ViewTraderFragment(),
-    TraderListener {
+class ClonPostsFragment : ViewMyPostsFragment(),
+    PostListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_view_traders, container, false)
+        root = inflater.inflate(R.layout.fragment_view_posts, container, false)
         activity?.title = getString(R.string.menu_report_all)
 
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
@@ -36,26 +35,26 @@ class ClonTraderFragment : ViewTraderFragment(),
     companion object {
         @JvmStatic
         fun newInstance() =
-            ClonTraderFragment().apply {
+            ClonPostsFragment().apply {
                 arguments = Bundle().apply { }
             }
     }
 
-//    override fun setSwipeRefresh() {
-//        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-//            override fun onRefresh() {
-//                root.swiperefresh.isRefreshing = true
-//                getAllUserTraders()
-//            }
-//        })
-//    }
+    override fun setSwipeRefresh() {
+        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                root.swiperefresh.isRefreshing = true
+                getAllUsersDonations()
+            }
+        })
+    }
 
     override fun onResume() {
         super.onResume()
-        getAllUserTraders()
+        getAllUsersDonations()
     }
 
-    fun getAllUserTraders() {
+    fun getAllUsersDonations() {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading All Users Donations from Firebase")
         val traderList = ArrayList<ClonTraderModel>()
@@ -74,9 +73,9 @@ class ClonTraderFragment : ViewTraderFragment(),
 
                         traderList.add(trader!!)
                         root.recyclerView.adapter =
-                            traderAdapter(
+                            feedAdapter(
                                 traderList,
-                                this@ClonTraderFragment,
+                                this@ClonPostsFragment,
                                 true
                             )
                         root.recyclerView.adapter?.notifyDataSetChanged()

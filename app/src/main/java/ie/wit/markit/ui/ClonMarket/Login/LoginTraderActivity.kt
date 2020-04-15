@@ -38,7 +38,7 @@ import kotlinx.android.synthetic.main.login.*
 import org.jetbrains.anko.startActivity
 
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginTraderActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var app: MainApp
     lateinit var loader : AlertDialog

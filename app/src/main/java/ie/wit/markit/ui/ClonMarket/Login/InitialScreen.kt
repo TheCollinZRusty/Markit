@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import ie.wit.AdminFragment.Login
 import ie.wit.R
 import kotlinx.android.synthetic.main.activity_initial_screen.*
 
@@ -18,11 +17,11 @@ class InitialScreen : AppCompatActivity() {
         supportActionBar?.hide()
         auth = FirebaseAuth.getInstance()
         JumploginButton.setOnClickListener() {
-            val intent = Intent(this, UserMainActivity::class.java)
+            val intent = Intent(this, LoginUserActivity::class.java)
             startActivity(intent)
         }
         JumpSignUpButton.setOnClickListener() {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, LoginTraderActivity::class.java)
             startActivity(intent)
         }
     }

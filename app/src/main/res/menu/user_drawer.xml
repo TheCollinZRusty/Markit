@@ -16,5 +16,17 @@
             android:id="@+id/nav_Location"
             android:icon="@mipmap/baseline_person_pin_circle_black_18dp"
             android:title="@string/menu_Location" />
+        <item
+            android:id="@+id/nav_Trader_Posts"
+            android:icon="@mipmap/baseline_person_pin_circle_black_18dp"
+            android:title="@string/menu_Location" />
+        <item android:title="Access Control">
+            <menu>
+                <item
+                    android:id="@+id/nav_sign_out"
+                    android:icon="@android:drawable/ic_menu_revert"
+                    android:title="@string/sign_out" />
+            </menu>
+        </item>
     </group>
 </menu>
