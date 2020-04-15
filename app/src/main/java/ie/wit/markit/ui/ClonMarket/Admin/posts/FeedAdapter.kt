@@ -9,6 +9,8 @@ import com.squareup.picasso.Picasso
 import ie.wit.R
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.card_feed.view.*
+import kotlinx.android.synthetic.main.card_feed.view.Description
+import kotlinx.android.synthetic.main.fragment_add_post.view.*
 
 interface PostListener {
     fun onDonationClick(clonTrader: ClonTraderModel)
@@ -46,7 +48,7 @@ class feedAdapter constructor(var clonPosts: ArrayList<ClonTraderModel>,
 
         fun bind(clonTrader: ClonTraderModel, listener: PostListener, reportAll: Boolean) {
             itemView.tag = clonTrader
-            itemView.name.text = clonTrader.Title
+            itemView.post_title.text = clonTrader.Post_Title
             itemView.Description.text = clonTrader.PostBody
 
             if(!reportAll)

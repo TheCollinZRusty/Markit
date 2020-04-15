@@ -5,26 +5,31 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_donate"
-            android:title="Add Trader" />
-        <item
-            android:id="@+id/nav_report"
+            android:id="@+id/nav_view_all_traders"
             android:title="Traders" />
         <item
-            android:id="@+id/nav_report_all"
-            android:title="All Traders" />
-        <item
-            android:id="@+id/nav_add_post"
-            android:title="Add a post" />
+            android:id="@+id/nav_view_trader"
+            android:title="My Info" />
         <item
             android:id="@+id/nav_view_post"
-            android:title="View your posts" />
+            android:title="My Posts" />
         <item
             android:id="@+id/nav_view_all_posts"
-            android:title="Post feed" />
+            android:title="My Feed" />
         <item
             android:id="@+id/nav_favourites"
             android:title="Favourites" />
+        <item android:title="Add">
+        <menu>
+
+            <item
+                android:id="@+id/nav_add_trader"
+                android:title="Add Info" />
+        <item
+            android:id="@+id/nav_add_post"
+            android:title="Write a post" />
+        </menu>
+        </item>
     </group>
     <item android:title="Access Control">
         <menu>

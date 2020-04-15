@@ -5,10 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_donate"
+            android:id="@+id/nav_add_trader"
             android:title="menu_donate" />
         <item
-            android:id="@+id/nav_report"
+            android:id="@+id/nav_view_trader"
             android:title="menu_report" />
         <item
             android:id="@+id/nav_favourites"

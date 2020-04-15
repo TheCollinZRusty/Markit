@@ -20,7 +20,6 @@ import java.util.HashMap
 class AddTraderFragment : Fragment(), AnkoLogger {
 
     lateinit var app: MainApp
-    var totalDonated = 0
     lateinit var loader: AlertDialog
     lateinit var eventListener: ValueEventListener
 

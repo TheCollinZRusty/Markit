@@ -20,7 +20,7 @@ import java.util.HashMap
 class AddPostFragment : Fragment(), AnkoLogger {
 
     lateinit var app: MainApp
-    var totalDonated = 0
+    var favourite = false
     lateinit var loader: AlertDialog
     lateinit var eventListener: ValueEventListener
 
@@ -53,17 +53,19 @@ class AddPostFragment : Fragment(), AnkoLogger {
 
     fun setButtonListener(layout: View) {
         layout.AddButton.setOnClickListener {
+            val post_Title = layout.Post_title.text.toString()
             val description = layout.Description.text.toString()
             writeNewTrader(
                 ClonTraderModel(
+                    Post_Title = post_Title,
                     PostBody = description,
                     profilepic = app.userImage.toString(),
+                    isfavourite = favourite,
                     email = app.auth.currentUser?.email
                 )
             )
         }
     }
-
     override fun onResume() {
         super.onResume()
         tradertotal(app.auth.currentUser?.uid)

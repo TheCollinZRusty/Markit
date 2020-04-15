@@ -1,81 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminFragment.AddPostFragment">
+    android:background="@drawable/backgroundgradient"
+    tools:context="ie.wit.markit.ui.ClonMarket.Admin.activities.AdminAddTrader">
 
-    <TextView
-        android:id="@+id/TraderTitle"
-        android:layout_width="188dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017" />
-
-    <Button
-        android:id="@+id/AddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Add post"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948" />
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom|right|top|left"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="-32dp"
-        tools:layout_editor_absoluteY="-42dp">
+        android:layout_height="match_parent">
 
-<!--        <EditText-->
-<!--            android:id="@+id/Number"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            android:layout_marginBottom="8dp"-->
-<!--            android:autofillHints="Please Enter an Amount"-->
-<!--            android:ems="10"-->
-<!--            android:hint="" />-->
-
-
-        <EditText
-            android:id="@+id/Description"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:autofillHints="Please Enter an Amount"
-            android:ems="10"
-            android:hint="Enter your post here" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <ImageView
+                android:id="@+id/splash_logo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/markitlogo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:drawablePadding="6dp"
+                android:padding="4dp"
+                android:text="Whats on your mind?"
+                android:textColor="#444444"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/Post_title"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/white"
+                android:drawablePadding="10dp"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:id="@+id/Description"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="257dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/white"
+                android:drawablePadding="10dp"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorHint="@color/white" />
+
+            <Button
+                android:id="@+id/AddButton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/colorAccent"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:stateListAnimator="@null"
+                android:text="@string/button_add"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

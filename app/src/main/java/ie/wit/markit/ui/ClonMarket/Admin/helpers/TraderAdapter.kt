@@ -7,6 +7,7 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.wit.R
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.card_trader.view.*
 
 interface TraderListener {
@@ -57,8 +58,8 @@ class traderAdapter constructor(var clonTraders: ArrayList<ClonTraderModel>,
 
             if(!clonTrader.profilepic.isEmpty()) {
                 Picasso.get().load(clonTrader.profilepic.toUri())
-                    //.resize(180, 180)
-//                    .transform(CropCircleTransformation())
+                    .resize(180, 180)
+                    .transform(CropCircleTransformation())
                     .into(itemView.imageIcon)
             }
             else

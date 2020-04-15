@@ -3,26 +3,21 @@ package ie.wit.AdminFragment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import ie.wit.markit.ui.ClonMarket.activities.LoginActivity
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.admin_activity.*
-import kotlinx.android.synthetic.main.app_bar_admin.*
 import kotlinx.android.synthetic.main.app_bar_home.toolbar
 import kotlinx.android.synthetic.main.nav_header_admin.view.*
-import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -56,7 +51,7 @@ class AdminActivity : AppCompatActivity(),
 
         ft = supportFragmentManager.beginTransaction()
 
-        val fragment = AddTraderFragment.newInstance()
+        val fragment = ViewAllPostsFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
     }
@@ -64,12 +59,12 @@ class AdminActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_donate ->
-                navigateTo(AddTraderFragment.newInstance())
-            R.id.nav_report ->
-                navigateTo(ViewTraderFragment.newInstance())
-            R.id.nav_report_all ->
+            R.id.nav_view_all_traders ->
                 navigateTo(ViewTraderAllFragment.newInstance())
+            R.id.nav_view_trader ->
+                navigateTo(ViewTraderFragment.newInstance())
+            R.id.nav_add_trader ->
+                navigateTo(AddTraderFragment.newInstance())
             R.id.nav_add_post ->
                 navigateTo(AddPostFragment.newInstance())
             R.id.nav_view_post ->
@@ -82,20 +77,6 @@ class AdminActivity : AppCompatActivity(),
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_home, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.action_donate -> toast("You Selected Donate")
-            R.id.action_report -> toast("You Selected Report")
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {

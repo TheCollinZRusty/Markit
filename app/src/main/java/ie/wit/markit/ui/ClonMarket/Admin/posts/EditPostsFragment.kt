@@ -40,12 +40,8 @@ class EditPostsFragment : Fragment(), AnkoLogger {
         root = inflater.inflate(R.layout.fragment_edit_post, container, false)
         activity?.title = getString(R.string.action_edit)
         loader = createLoader(activity!!)
-
-        root.editName.setText(editClonTrader!!.Name)
+        root.editPost_title.setText(editClonTrader!!.Post_Title)
         root.editDescription.setText(editClonTrader!!.PostBody)
-        root.editName.setText(editClonTrader!!.Number)
-//        root.editMessage.setText(editClonTrader!!.message)
-//        root.editUpvotes.setText(editClonTrader!!.upvotes.toString())
 
         root.editUpdateButton.setOnClickListener {
             showLoader(loader, "Updating Donation on Server...")
@@ -69,9 +65,9 @@ class EditPostsFragment : Fragment(), AnkoLogger {
     }
 
     fun updateDonationData() {
-        editClonTrader!!.Name = root.editName.text.toString()
+//        editClonTrader!!.Name = root.editName.text.toString()
         editClonTrader!!.PostBody = root.editDescription.text.toString()
-        editClonTrader!!.Number = root.editNumber.text.toString()
+//        editClonTrader!!.Number = root.editNumber.text.toString()
 //        editClonTrader!!.message = root.editMessage.text.toString()
 //        editClonTrader!!.upvotes = root.editUpvotes.text.toString().toInt()
     }

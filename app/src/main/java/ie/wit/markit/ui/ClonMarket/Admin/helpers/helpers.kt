@@ -24,7 +24,6 @@ import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.admin_activity.*
 import kotlinx.android.synthetic.main.nav_header_admin.view.*
-import kotlinx.android.synthetic.main.nav_header_home.view.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.lang.Exception
@@ -68,13 +67,20 @@ fun convertImageToBytes(imageView: ImageView) : ByteArray {
 }
 
 fun uploadImageView(app: MainApp, imageView: ImageView) {
+    // Get the data from an ImageView as bytes
     val uid = app.auth.currentUser!!.uid
     val imageRef = app.storage.child("photos").child("${uid}.jpg")
-    val uploadTask = imageRef.putBytes(convertImageToBytes(imageView))
+    val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+    val baos = ByteArrayOutputStream()
+
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+    val data = baos.toByteArray()
+
+    var uploadTask = imageRef.putBytes(data)
 
     uploadTask.addOnFailureListener { object : OnFailureListener {
         override fun onFailure(error: Exception) {
-            Log.v("Donation", "uploadTask.exception" + error)
+            Log.v("Trader", "uploadTask.exception" + error)
         }
     }
     }.addOnSuccessListener {
@@ -83,7 +89,7 @@ fun uploadImageView(app: MainApp, imageView: ImageView) {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 app.userImage = task.result!!.toString().toUri()
-                updateAllDonations(app)
+                updateAllTraders(app)
                 writeImageRef(app, app.userImage.toString())
                 Picasso.get().load(app.userImage)
                     .resize(180, 180)
@@ -114,15 +120,15 @@ fun readImageUri(resultCode: Int, data: Intent?): Uri? {
     return uri
 }
 
-fun updateAllDonations(app: MainApp) {
+fun updateAllTraders(app: MainApp) {
     val userId = app.auth.currentUser!!.uid
     val userEmail = app.auth.currentUser!!.email
-    var donationRef = app.database.ref.child("clonTraders")
+    var traderref = app.database.ref.child("clonTraders")
                                   .orderByChild("email")
-    val userdonationRef = app.database.ref.child("user-clonTraders")
+    val usertraderref = app.database.ref.child("user-clonTraders")
                                   .child(userId).orderByChild("uid")
 
-    donationRef.equalTo(userEmail).addListenerForSingleValueEvent(
+    traderref.equalTo(userEmail).addListenerForSingleValueEvent(
         object : ValueEventListener {
         override fun onCancelled(error: DatabaseError) {}
         override fun onDataChange(snapshot: DataSnapshot) {
@@ -133,7 +139,7 @@ fun updateAllDonations(app: MainApp) {
         }
     })
 
-    userdonationRef.addListenerForSingleValueEvent(
+    usertraderref.addListenerForSingleValueEvent(
         object : ValueEventListener {
         override fun onCancelled(error: DatabaseError) {}
         override fun onDataChange(snapshot: DataSnapshot) {
