@@ -28,7 +28,7 @@ class EditPostsFragment : Fragment(), AnkoLogger {
         app = activity?.application as MainApp
 
         arguments?.let {
-            editClonTrader = it.getParcelable("editdonation")
+            editClonTrader = it.getParcelable("editposts")
         }
     }
 
@@ -44,10 +44,10 @@ class EditPostsFragment : Fragment(), AnkoLogger {
         root.editDescription.setText(editClonTrader!!.PostBody)
 
         root.editUpdateButton.setOnClickListener {
-            showLoader(loader, "Updating Donation on Server...")
-            updateDonationData()
-            updateDonation(editClonTrader!!.uid, editClonTrader!!)
-            updateUserDonation(app.auth.currentUser!!.uid,
+            showLoader(loader, "Updating posts on Server...")
+            updatePostData()
+            updatePost(editClonTrader!!.uid, editClonTrader!!)
+            updateUserPost(app.auth.currentUser!!.uid,
                                editClonTrader!!.uid, editClonTrader!!)
         }
 
@@ -59,12 +59,12 @@ class EditPostsFragment : Fragment(), AnkoLogger {
         fun newInstance(clonTrader: ClonTraderModel) =
             EditPostsFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("editdonation",clonTrader)
+                    putParcelable("editposts",clonTrader)
                 }
             }
     }
 
-    fun updateDonationData() {
+    fun updatePostData() {
 //        editClonTrader!!.Name = root.editName.text.toString()
         editClonTrader!!.PostBody = root.editDescription.text.toString()
 //        editClonTrader!!.Number = root.editNumber.text.toString()
@@ -72,8 +72,8 @@ class EditPostsFragment : Fragment(), AnkoLogger {
 //        editClonTrader!!.upvotes = root.editUpvotes.text.toString().toInt()
     }
 
-    fun updateUserDonation(userId: String, uid: String?, clonTrader: ClonTraderModel) {
-        app.database.child("user-traders").child(userId).child(uid!!)
+    fun updateUserPost(userId: String, uid: String?, clonTrader: ClonTraderModel) {
+        app.database.child("user-posts").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -91,8 +91,8 @@ class EditPostsFragment : Fragment(), AnkoLogger {
                 })
     }
 
-    fun updateDonation(uid: String?, clonTrader: ClonTraderModel) {
-        app.database.child("traders").child(uid!!)
+    fun updatePost(uid: String?, clonTrader: ClonTraderModel) {
+        app.database.child("posts").child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {

@@ -8,7 +8,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
 //    buildToolsVersion "29.0.2"
-    defaultConfig {
+    defaultConfig{
         applicationId "ie.wit.markit"
         minSdkVersion 28
         targetSdkVersion 28

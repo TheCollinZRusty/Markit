@@ -18,21 +18,29 @@
         android:roundIcon="@drawable/markitlogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".AdminFragment.AdminActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".markit.ui.ClonMarket.activities.UserMainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCQM1-jjT6ihw9XgWfYLbcbGjnIFpg12qU" />
 
 
-        <activity android:name=".markit.ui.ClonMarket.activities.UserMainActivity" />
-        <activity android:name=".AdminFragment.AdminActivity" />
         <activity android:name=".markit.ui.ClonMarket.activities.LoginTraderActivity" />
         <activity android:name=".markit.ui.ClonMarket.activities.LoginUserActivity" />
         <activity android:name=".markit.ui.ClonMarket.activities.InitialScreen" />
         <activity
             android:name=".markit.ui.ClonMarket.activities.SplashScreen"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

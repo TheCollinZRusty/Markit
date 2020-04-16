@@ -5,26 +5,36 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:title="Market content">
+            <menu>
+        <item
             android:id="@+id/nav_view_all_traders"
             android:title="Traders" />
-        <item
-            android:id="@+id/nav_view_trader"
-            android:title="My Info" />
-        <item
-            android:id="@+id/nav_view_post"
-            android:title="My Posts" />
+                <item
+                    android:id="@+id/nav_favourites"
+                    android:title="Favourites" />
         <item
             android:id="@+id/nav_view_all_posts"
             android:title="My Feed" />
+            </menu>
+        </item>
         <item
-            android:id="@+id/nav_favourites"
-            android:title="Favourites" />
-        <item android:title="Add">
-        <menu>
+            android:title="My Content">
+            <menu>
+            <item
+                android:id="@+id/nav_view_trader"
+                android:title="My Info" />
+            <item
+                android:id="@+id/nav_view_post"
+                android:title="My Posts" />
+            </menu>
+        </item>
 
+        <item android:title="Create">
+        <menu>
             <item
                 android:id="@+id/nav_add_trader"
-                android:title="Add Info" />
+                android:title="Write your bio" />
         <item
             android:id="@+id/nav_add_post"
             android:title="Write a post" />

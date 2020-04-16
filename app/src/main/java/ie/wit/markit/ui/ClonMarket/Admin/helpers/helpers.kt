@@ -23,6 +23,8 @@ import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.admin_activity.*
+import kotlinx.android.synthetic.main.admin_activity.navView
+import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_admin.view.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -67,20 +69,13 @@ fun convertImageToBytes(imageView: ImageView) : ByteArray {
 }
 
 fun uploadImageView(app: MainApp, imageView: ImageView) {
-    // Get the data from an ImageView as bytes
     val uid = app.auth.currentUser!!.uid
     val imageRef = app.storage.child("photos").child("${uid}.jpg")
-    val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-    val baos = ByteArrayOutputStream()
-
-    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-    val data = baos.toByteArray()
-
-    var uploadTask = imageRef.putBytes(data)
+    val uploadTask = imageRef.putBytes(convertImageToBytes(imageView))
 
     uploadTask.addOnFailureListener { object : OnFailureListener {
         override fun onFailure(error: Exception) {
-            Log.v("Trader", "uploadTask.exception" + error)
+            Log.v("Donation", "uploadTask.exception" + error)
         }
     }
     }.addOnSuccessListener {
@@ -89,8 +84,8 @@ fun uploadImageView(app: MainApp, imageView: ImageView) {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 app.userImage = task.result!!.toString().toUri()
-                updateAllTraders(app)
-                writeImageRef(app, app.userImage.toString())
+                updateAllDonations(app)
+                writeImageRef(app,app.userImage.toString())
                 Picasso.get().load(app.userImage)
                     .resize(180, 180)
                     .transform(CropCircleTransformation())
@@ -120,42 +115,40 @@ fun readImageUri(resultCode: Int, data: Intent?): Uri? {
     return uri
 }
 
-fun updateAllTraders(app: MainApp) {
+fun updateAllDonations(app: MainApp) {
     val userId = app.auth.currentUser!!.uid
     val userEmail = app.auth.currentUser!!.email
-    var traderref = app.database.ref.child("clonTraders")
-                                  .orderByChild("email")
-    val usertraderref = app.database.ref.child("user-clonTraders")
-                                  .child(userId).orderByChild("uid")
+    val donationRef = app.database.ref.child("donations")
+        .orderByChild("email")
+    val userdonationRef = app.database.ref.child("user-donations")
+        .child(userId).orderByChild("uid")
 
-    traderref.equalTo(userEmail).addListenerForSingleValueEvent(
+    donationRef.equalTo(userEmail).addListenerForSingleValueEvent(
         object : ValueEventListener {
-        override fun onCancelled(error: DatabaseError) {}
-        override fun onDataChange(snapshot: DataSnapshot) {
-            snapshot.children.forEach {
-                it.ref.child("profilepic")
-                    .setValue(app.userImage.toString())
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    it.ref.child("profilepic")
+                        .setValue(app.userImage.toString())
+                }
             }
-        }
-    })
-
-    usertraderref.addListenerForSingleValueEvent(
+        })
+    userdonationRef.addListenerForSingleValueEvent(
         object : ValueEventListener {
-        override fun onCancelled(error: DatabaseError) {}
-        override fun onDataChange(snapshot: DataSnapshot) {
-            snapshot.children.forEach {
-                it.ref.child("profilepic")
-                    .setValue(app.userImage.toString())
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    it.ref.child("profilepic")
+                        .setValue(app.userImage.toString())
+                }
             }
-        }
-    })
-
+        })
     writeImageRef(app, app.userImage.toString())
 }
 
 fun writeImageRef(app: MainApp, imageRef: String) {
     val userId = app.auth.currentUser!!.uid
-    val values = UserPhotoModel(userId, imageRef).toMap()
+    val values = UserPhotoModel(userId,imageRef).toMap()
     val childUpdates = HashMap<String, Any>()
 
     childUpdates["/user-photos/$userId"] = values
@@ -163,21 +156,17 @@ fun writeImageRef(app: MainApp, imageRef: String) {
 }
 
 fun validatePhoto(app: MainApp, activity: Activity) {
-
     var imageUri: Uri? = null
     val imageExists = app.userImage.toString().length > 0
     val googlePhotoExists = app.auth.currentUser?.photoUrl != null
 
-    if(imageExists)
-        imageUri = app.userImage
-    else
-        if (googlePhotoExists)
-            imageUri = app.auth.currentUser?.photoUrl!!
+    if(imageExists) imageUri = app.userImage
+    else if (googlePhotoExists) imageUri = app.auth.currentUser?.photoUrl!!
 
     if (googlePhotoExists || imageExists) {
         if(!app.auth.currentUser?.displayName.isNullOrEmpty())
-        activity.navView.getHeaderView(0)
-            .nav_header_name.text = app.auth.currentUser?.displayName
+            activity.navView.getHeaderView(0)
+                .nav_header_name.text = app.auth.currentUser?.displayName
         else
             activity.navView.getHeaderView(0)
                 .nav_header_name.text = activity.getText(R.string.nav_header_title)
@@ -187,40 +176,33 @@ fun validatePhoto(app: MainApp, activity: Activity) {
             .transform(CropCircleTransformation())
             .into(activity.navView.getHeaderView(0).imageView, object : Callback {
                 override fun onSuccess() {
-                    // Drawable is ready
-                    uploadImageView(
-                        app,
-                        activity.navView.getHeaderView(0).imageView
-                    )
+                    uploadImageView(app,
+                        activity.navView.getHeaderView(0).imageView)
                 }
                 override fun onError(e: Exception) {}
             })
     }
-    else    // New Regular User, upload default pic of homer
-    {
-        activity.navView.getHeaderView(0).imageView.setImageResource(R.mipmap.ic_launcher_round)
+    else {   // New Regular User, upload default pic of homer
+        activity.navView.getHeaderView(0).imageView
+            .setImageResource(R.mipmap.ic_launcher_round)
         uploadImageView(app, activity.navView.getHeaderView(0).imageView)
     }
 }
 
-fun checkExistingPhoto(app: MainApp, activity: Activity) {
+fun checkExistingPhoto(app: MainApp,activity: Activity) {
 
     app.userImage = "".toUri()
-    Log.v("Donation","checkExistingPhoto 1 app.userImage : ${app.userImage}")
-
     app.database.child("user-photos").orderByChild("uid")
         .equalTo(app.auth.currentUser!!.uid)
         .addListenerForSingleValueEvent(object : ValueEventListener {
 
-        override fun onDataChange(snapshot: DataSnapshot ) {
-            snapshot.children.forEach {
-                val usermodel = it.getValue<UserPhotoModel>(UserPhotoModel::class.java)
-                app.userImage = usermodel!!.profilepic.toUri()
-                Log.v("Donation","checkExistingPhoto 2 app.userImage : ${app.userImage}")
+            override fun onDataChange(snapshot: DataSnapshot ) {
+                snapshot.children.forEach {
+                    val usermodel = it.getValue<UserPhotoModel>(UserPhotoModel::class.java)
+                    app.userImage = usermodel!!.profilepic.toUri()
+                }
+                validatePhoto(app,activity)
             }
-            Log.v("Donation","validatePhoto 3 app.userImage : ${app.userImage}")
-            validatePhoto(app, activity)
-        }
-       override fun onCancelled(databaseError: DatabaseError ) {}
-    })
+            override fun onCancelled(databaseError: DatabaseError ) {}
+        })
 }

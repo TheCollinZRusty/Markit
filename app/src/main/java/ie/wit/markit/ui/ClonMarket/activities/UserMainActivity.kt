@@ -108,19 +108,14 @@ class UserMainActivity : AppCompatActivity(),
         when (requestCode) {
             1 -> {
                 if (data != null) {
-                    writeImageRef(
-                        app,
-                        readImageUri(resultCode, data).toString()
-                    )
+                    writeImageRef(app, readImageUri(resultCode, data).toString())
                     Picasso.get().load(readImageUri(resultCode, data).toString())
                         .resize(180, 180)
                         .transform(CropCircleTransformation())
                         .into(navView.getHeaderView(0).imageView, object : Callback {
                             override fun onSuccess() {
                                 // Drawable is ready
-                                uploadImageView(
-                                    app,
-                                    navView.getHeaderView(0).imageView
+                                uploadImageView(app, navView.getHeaderView(0).imageView
                                 )
                             }
                             override fun onError(e: Exception) {}

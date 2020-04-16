@@ -44,21 +44,21 @@ class ClonPostsFragment : ViewMyPostsFragment(),
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllUsersDonations()
+                getAllUsersPosts()
             }
         })
     }
 
     override fun onResume() {
         super.onResume()
-        getAllUsersDonations()
+        getAllUsersPosts()
     }
 
-    fun getAllUsersDonations() {
+    fun getAllUsersPosts() {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading All Users Donations from Firebase")
         val traderList = ArrayList<ClonTraderModel>()
-        app.database.child("traders")
+        app.database.child("posts")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     info("Firebase Trader error : ${error.message}")
@@ -81,7 +81,7 @@ class ClonPostsFragment : ViewMyPostsFragment(),
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 
-                        app.database.child("traders").removeEventListener(this)
+                        app.database.child("posts").removeEventListener(this)
                     }
                 }
             })

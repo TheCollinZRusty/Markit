@@ -48,8 +48,8 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = root.recyclerView.adapter as feedAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                deleteDonation((viewHolder.itemView.tag as ClonTraderModel).uid)
-                deleteUserDonation(app.auth.currentUser!!.uid,
+                deletePost((viewHolder.itemView.tag as ClonTraderModel).uid)
+                deleteUserPosts(app.auth.currentUser!!.uid,
                                   (viewHolder.itemView.tag as ClonTraderModel).uid)
             }
         }
@@ -58,7 +58,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
 
         val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onDonationClick(viewHolder.itemView.tag as ClonTraderModel)
+                onPostClick(viewHolder.itemView.tag as ClonTraderModel)
             }
         }
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
@@ -79,7 +79,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllDonations(app.auth.currentUser!!.uid)
+                getAllPosts(app.auth.currentUser!!.uid)
             }
         })
     }
@@ -88,8 +88,8 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
         if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
     }
 
-    fun deleteUserDonation(userId: String, uid: String?) {
-        app.database.child("user-traders").child(userId).child(uid!!)
+    fun deleteUserPosts(userId: String, uid: String?) {
+        app.database.child("user-posts").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -101,8 +101,8 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
                 })
     }
 
-    fun deleteDonation(uid: String?) {
-        app.database.child("traders").child(uid!!)
+    fun deletePost(uid: String?) {
+        app.database.child("posts").child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -115,7 +115,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
                 })
     }
 
-    override fun onDonationClick(clonTrader: ClonTraderModel) {
+    override fun onPostClick(clonTrader: ClonTraderModel) {
         activity!!.supportFragmentManager.beginTransaction()
             .replace(R.id.homeFrame, EditPostsFragment.newInstance(clonTrader))
             .addToBackStack(null)
@@ -125,14 +125,14 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
     override fun onResume() {
         super.onResume()
         if(this::class == ViewMyPostsFragment::class)
-            getAllDonations(app.auth.currentUser!!.uid)
+            getAllPosts(app.auth.currentUser!!.uid)
     }
 
-    fun getAllDonations(userId: String?) {
+    fun getAllPosts(userId: String?) {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading Donations from Firebase")
         val donationsList = ArrayList<ClonTraderModel>()
-        app.database.child("user-traders").child(userId!!)
+        app.database.child("user-posts").child(userId!!)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     info("Firebase Donation error : ${error.message}")
@@ -155,7 +155,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 
-                        app.database.child("user-traders").child(userId)
+                        app.database.child("user-posts").child(userId)
                             .removeEventListener(this)
                     }
                 }

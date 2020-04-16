@@ -47,8 +47,8 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = root.recyclerView.adapter as traderAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                deleteDonation((viewHolder.itemView.tag as ClonTraderModel).uid)
-                deleteUserDonation(app.auth.currentUser!!.uid,
+                deleteTrader((viewHolder.itemView.tag as ClonTraderModel).uid)
+                deleteUserTrader(app.auth.currentUser!!.uid,
                                   (viewHolder.itemView.tag as ClonTraderModel).uid)
             }
         }
@@ -83,7 +83,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
     fun checkSwipeRefresh() {
         if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
     }
-    fun deleteUserDonation(userId: String, uid: String?) {
+    fun deleteUserTrader(userId: String, uid: String?) {
         app.database.child("user-traders").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -95,7 +95,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
                     }
                 })
     }
-    fun deleteDonation(uid: String?) {
+    fun deleteTrader(uid: String?) {
         app.database.child("traders").child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {

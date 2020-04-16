@@ -10,10 +10,9 @@ import ie.wit.R
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.card_feed.view.*
 import kotlinx.android.synthetic.main.card_feed.view.Description
-import kotlinx.android.synthetic.main.fragment_add_post.view.*
 
 interface PostListener {
-    fun onDonationClick(clonTrader: ClonTraderModel)
+    fun onPostClick(clonTrader: ClonTraderModel)
 }
 
 class feedAdapter constructor(var clonPosts: ArrayList<ClonTraderModel>,
@@ -52,7 +51,7 @@ class feedAdapter constructor(var clonPosts: ArrayList<ClonTraderModel>,
             itemView.Description.text = clonTrader.PostBody
 
             if(!reportAll)
-                itemView.setOnClickListener { listener.onDonationClick(clonTrader) }
+                itemView.setOnClickListener { listener.onPostClick(clonTrader) }
 
             if(!clonTrader.profilepic.isEmpty()) {
                 Picasso.get().load(clonTrader.profilepic.toUri())

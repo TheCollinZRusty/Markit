@@ -55,7 +55,7 @@ class AddPostFragment : Fragment(), AnkoLogger {
         layout.AddButton.setOnClickListener {
             val post_Title = layout.Post_title.text.toString()
             val description = layout.Description.text.toString()
-            writeNewTrader(
+            writeNewPost(
                 ClonTraderModel(
                     Post_Title = post_Title,
                     PostBody = description,
@@ -68,23 +68,23 @@ class AddPostFragment : Fragment(), AnkoLogger {
     }
     override fun onResume() {
         super.onResume()
-        tradertotal(app.auth.currentUser?.uid)
+        posttotal(app.auth.currentUser?.uid)
     }
 
     override fun onPause() {
         super.onPause()
         if (app.auth.uid != null)
-            app.database.child("user-traders")
+            app.database.child("user-posts")
                 .child(app.auth.currentUser!!.uid)
                 .removeEventListener(eventListener)
     }
 
-    fun writeNewTrader(clonTrader: ClonTraderModel) {
+    fun writeNewPost(clonTrader: ClonTraderModel) {
 //         Create new clonTrader at /clonPosts & /clonPosts/$uid
         showLoader(loader, "Adding Donation to Firebase")
         info("Firebase DB Reference : $app.database")
         val uid = app.auth.currentUser!!.uid
-        val key = app.database.child("traders").push().key
+        val key = app.database.child("posts").push().key
         if (key == null) {
             info("Firebase Error : Key Empty")
             return
@@ -92,21 +92,21 @@ class AddPostFragment : Fragment(), AnkoLogger {
         clonTrader.uid = key
         val traderValues = clonTrader.toMap()
         val childUpdates = HashMap<String, Any>()
-        childUpdates["/traders/$key"] = traderValues
-        childUpdates["/user-traders/$uid/$key"] = traderValues
+        childUpdates["/posts/$key"] = traderValues
+        childUpdates["/user-posts/$uid/$key"] = traderValues
         app.database.updateChildren(childUpdates)
         hideLoader(loader)
     }
-    fun tradertotal(userId: String?) {
+    fun posttotal(userId: String?) {
         eventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                info("Firebase Donation error : ${error.message}")
+                info("Firebase posts error : ${error.message}")
             }
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
                 children.forEach {
                 }
-                app.database.child("user-traders").child(userId!!)
+                app.database.child("user-posts").child(userId!!)
                     .addValueEventListener(eventListener)
             }
         }
