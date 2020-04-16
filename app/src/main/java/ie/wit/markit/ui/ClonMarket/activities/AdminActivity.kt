@@ -8,11 +8,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
+import ie.wit.markit.ui.ClonMarket.activities.InitialScreen
 import ie.wit.markit.ui.ClonMarket.activities.LoginTraderActivity
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.admin_activity.*
@@ -41,13 +43,13 @@ class AdminActivity : AppCompatActivity(),
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
+        if(app.currentUser.email != null)
+            navView.getHeaderView(0).nav_header_email.text = app.currentUser.email
+        else
+            navView.getHeaderView(0).nav_header_email.text = "No Email Specified..."
 
         //Checking if Google User, upload google profile pic
         checkExistingPhoto(app, this)
-
-        navView.getHeaderView(0).imageView
-            .setOnClickListener { showImagePicker(this, 1) }
 
         ft = supportFragmentManager.beginTransaction()
 
@@ -94,11 +96,10 @@ class AdminActivity : AppCompatActivity(),
     }
 
     private fun signOut() {
-        app.googleSignInClient.signOut().addOnCompleteListener(this) {
-            app.auth.signOut()
-            startActivity<LoginTraderActivity>()
-            finish()
-        }
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener { startActivity<InitialScreen>() }
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

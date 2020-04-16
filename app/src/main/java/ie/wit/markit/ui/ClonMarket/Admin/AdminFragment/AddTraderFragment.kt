@@ -62,7 +62,7 @@ class AddTraderFragment : Fragment(), AnkoLogger {
                 ClonTraderModel(
                     Title = title, Description = description, Number = number,TraderEmail = traderemail, TraderStart = traderstart, TraderEnd = traderend,
                     profilepic = app.userImage.toString(),
-                    email = app.auth.currentUser?.email
+                    email = app.currentUser?.email
                 )
             )
         }
@@ -70,14 +70,14 @@ class AddTraderFragment : Fragment(), AnkoLogger {
 
     override fun onResume() {
         super.onResume()
-        tradertotal(app.auth.currentUser?.uid)
+        tradertotal(app.currentUser?.uid)
     }
 
     override fun onPause() {
         super.onPause()
-        if (app.auth.uid != null)
+        if (app.currentUser.uid != null)
             app.database.child("user-traders")
-                .child(app.auth.currentUser!!.uid)
+                .child(app.currentUser!!.uid)
                 .removeEventListener(eventListener)
     }
 
@@ -85,7 +85,7 @@ class AddTraderFragment : Fragment(), AnkoLogger {
 //         Create new clonTrader at /clonTraders & /clonTraders/$uid
         showLoader(loader, "Adding Donation to Firebase")
         info("Firebase DB Reference : $app.database")
-        val uid = app.auth.currentUser!!.uid
+        val uid = app.currentUser!!.uid
         val key = app.database.child("traders").push().key
         if (key == null) {
             info("Firebase Error : Key Empty")

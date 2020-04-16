@@ -49,7 +49,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
                 val adapter = root.recyclerView.adapter as feedAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 deletePost((viewHolder.itemView.tag as ClonTraderModel).uid)
-                deleteUserPosts(app.auth.currentUser!!.uid,
+                deleteUserPosts(app.currentUser!!.uid,
                                   (viewHolder.itemView.tag as ClonTraderModel).uid)
             }
         }
@@ -79,7 +79,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllPosts(app.auth.currentUser!!.uid)
+                getAllPosts(app.currentUser!!.uid)
             }
         })
     }
@@ -125,7 +125,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
     override fun onResume() {
         super.onResume()
         if(this::class == ViewMyPostsFragment::class)
-            getAllPosts(app.auth.currentUser!!.uid)
+            getAllPosts(app.currentUser!!.uid)
     }
 
     fun getAllPosts(userId: String?) {

@@ -61,21 +61,21 @@ class AddPostFragment : Fragment(), AnkoLogger {
                     PostBody = description,
                     profilepic = app.userImage.toString(),
                     isfavourite = favourite,
-                    email = app.auth.currentUser?.email
+                    email = app.currentUser?.email
                 )
             )
         }
     }
     override fun onResume() {
         super.onResume()
-        posttotal(app.auth.currentUser?.uid)
+        posttotal(app.currentUser?.uid)
     }
 
     override fun onPause() {
         super.onPause()
-        if (app.auth.uid != null)
+        if (app.currentUser.uid != null)
             app.database.child("user-posts")
-                .child(app.auth.currentUser!!.uid)
+                .child(app.currentUser!!.uid)
                 .removeEventListener(eventListener)
     }
 
@@ -83,7 +83,7 @@ class AddPostFragment : Fragment(), AnkoLogger {
 //         Create new clonTrader at /clonPosts & /clonPosts/$uid
         showLoader(loader, "Adding Donation to Firebase")
         info("Firebase DB Reference : $app.database")
-        val uid = app.auth.currentUser!!.uid
+        val uid = app.currentUser!!.uid
         val key = app.database.child("posts").push().key
         if (key == null) {
             info("Firebase Error : Key Empty")

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.firebase.ui.auth.AuthUI
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.AdminFragment.*
@@ -46,8 +47,11 @@ class UserMainActivity : AppCompatActivity(),
         )
         user_drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
-        nav_view.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
+//
+//        if(app.currentUser.email != null)
+//            navView.getHeaderView(0).nav_header_email.text = app.currentUser.email
+//        else
+//            navView.getHeaderView(0).nav_header_email.text = "No Email Specified..."
 
         //Checking if Google User, upload google profile pic
         checkExistingPhoto(app, this)
@@ -96,13 +100,11 @@ class UserMainActivity : AppCompatActivity(),
     }
 
     private fun signOut() {
-        app.googleSignInClient.signOut().addOnCompleteListener(this) {
-            app.auth.signOut()
-            startActivity<LoginTraderActivity>()
-            finish()
-        }
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener { startActivity<InitialScreen>() }
+        finish()
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {

@@ -61,4 +61,9 @@
     <string name="emailpassword_title_text">Please Login Below</string>
 
     <string name="select_profile_image">Select Profile Image</string>
+
+
+    <string name="sign_in_google">Sign In with Google</string>
+    <string name="sign_in_email">Sign In with Email</string>
+    <string name="sign_in_phone">Sign In with Phone</string>
 </resources>

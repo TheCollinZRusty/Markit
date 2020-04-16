@@ -48,7 +48,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
                 val adapter = root.recyclerView.adapter as traderAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 deleteTrader((viewHolder.itemView.tag as ClonTraderModel).uid)
-                deleteUserTrader(app.auth.currentUser!!.uid,
+                deleteUserTrader(app.currentUser!!.uid,
                                   (viewHolder.itemView.tag as ClonTraderModel).uid)
             }
         }
@@ -76,7 +76,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllTrader(app.auth.currentUser!!.uid)
+                getAllTrader(app.currentUser!!.uid)
             }
         })
     }
@@ -116,7 +116,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
     override fun onResume() {
         super.onResume()
         if(this::class == ViewTraderFragment::class)
-            getAllTrader(app.auth.currentUser!!.uid)
+            getAllTrader(app.currentUser!!.uid)
     }
     fun getAllTrader(userId: String?) {
         loader = createLoader(activity!!)

@@ -56,7 +56,7 @@ class EditTraderFragment : Fragment(), AnkoLogger {
             showLoader(loader, "Updating Donation on Server...")
             updateTraderData()
             updateTrader(editClonTrader!!.uid, editClonTrader!!)
-            updateUsersTrader(app.auth.currentUser!!.uid,
+            updateUsersTrader(app.currentUser!!.uid,
                                editClonTrader!!.uid, editClonTrader!!)
         }
 

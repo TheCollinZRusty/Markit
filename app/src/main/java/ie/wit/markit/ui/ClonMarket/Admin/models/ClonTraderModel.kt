@@ -22,6 +22,8 @@ data class ClonTraderModel(
     var isfavourite: Boolean = false,
     var Upvotes: Int = 0,
     var profilepic: String = "",
+    var latitude: Double = 0.0,
+    var longitude: Double = 0.0,
     var email: String? = "joe@bloggs.com")
     : Parcelable
 {
@@ -41,6 +43,8 @@ data class ClonTraderModel(
 //            "message" to message,
             "upvotes" to Upvotes,
             "profilepic" to profilepic,
+            "latitude" to latitude,
+            "longitude" to longitude,
             "email" to email
         )
     }

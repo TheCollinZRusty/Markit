@@ -47,7 +47,7 @@ class EditPostsFragment : Fragment(), AnkoLogger {
             showLoader(loader, "Updating posts on Server...")
             updatePostData()
             updatePost(editClonTrader!!.uid, editClonTrader!!)
-            updateUserPost(app.auth.currentUser!!.uid,
+            updateUserPost(app.currentUser!!.uid,
                                editClonTrader!!.uid, editClonTrader!!)
         }
 

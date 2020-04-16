@@ -58,4 +58,12 @@
         <item name="android:textSize">30sp</item>
     </style>
     <!-- END Firebase Resources-->
+    <style name="FirebaseLoginTheme" parent="FirebaseUI">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:textColorHint">#FFFFFF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
 </resources>
