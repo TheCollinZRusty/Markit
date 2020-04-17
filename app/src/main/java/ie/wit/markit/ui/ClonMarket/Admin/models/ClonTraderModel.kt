@@ -40,7 +40,6 @@ data class ClonTraderModel(
             "TraderEmail" to TraderEmail,
             "TraderStart" to TraderStart,
             "TraderEnd" to TraderEnd,
-//            "message" to message,
             "upvotes" to Upvotes,
             "profilepic" to profilepic,
             "latitude" to latitude,

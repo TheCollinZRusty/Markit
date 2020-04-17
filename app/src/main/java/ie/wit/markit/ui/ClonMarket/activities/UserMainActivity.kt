@@ -47,11 +47,11 @@ class UserMainActivity : AppCompatActivity(),
         )
         user_drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-//
-//        if(app.currentUser.email != null)
-//            navView.getHeaderView(0).nav_header_email.text = app.currentUser.email
-//        else
-//            navView.getHeaderView(0).nav_header_email.text = "No Email Specified..."
+
+        if(app.currentUser.email != null)
+            nav_view.getHeaderView(0).nav_header_email.text = app.currentUser.email
+        else
+            nav_view.getHeaderView(0).nav_header_email.text = "No Email Specified..."
 
         //Checking if Google User, upload google profile pic
         checkExistingPhoto(app, this)
@@ -114,10 +114,10 @@ class UserMainActivity : AppCompatActivity(),
                     Picasso.get().load(readImageUri(resultCode, data).toString())
                         .resize(180, 180)
                         .transform(CropCircleTransformation())
-                        .into(navView.getHeaderView(0).imageView, object : Callback {
+                        .into(nav_view.getHeaderView(0).imageView, object : Callback {
                             override fun onSuccess() {
                                 // Drawable is ready
-                                uploadImageView(app, navView.getHeaderView(0).imageView
+                                uploadImageView(app, nav_view.getHeaderView(0).imageView
                                 )
                             }
                             override fun onError(e: Exception) {}
