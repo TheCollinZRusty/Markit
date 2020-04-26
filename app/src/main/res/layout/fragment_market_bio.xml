@@ -1,33 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/inchidoney"
+    android:orientation="vertical"
+    android:weightSum="4">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="849dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="439dp"
-                    android:layout_height="986dp"
-                    android:layout_gravity="center_horizontal|top"
-                    android:paddingStart="0dp"
-                    app:srcCompat="@drawable/clonakiltymarketbackground" />
+                    android:id="@+id/icon"
+                    style="@style/ThemeOverlay.FirebaseIcon"
+                    android:layout_width="143dp"
+                    android:layout_height="162.5dp"
+                    android:contentDescription="@string/desc_firebase_lockup"
+                    android:src="@drawable/markitlogo" />
 
-            </FrameLayout>
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="88dp"
+                    android:paddingTop="30dp"
+                    android:text="Clonakilty Farmers Market "
+                    android:textColor="#FFFFFF"
+                    android:textSize="18dp"
+                    android:theme="@style/ThemeOverlay.MyTitleText" />
 
+                <TextView
+                    android:id="@+id/titleText2"
+                    android:layout_width="318dp"
+                    android:layout_height="181dp"
+                    android:background="#88272727"
+                    android:paddingTop="30dp"
+                    android:text="Clonakilty Farmers Market is held every Friday from 9am-2pm in Clonakilty, County Cork. An amazing range of locally grown organic produce, hot food, baking, plants and crafts are available. You can find the market around Recorders Alley-a small laneway connecting Pearse Street to the Kent Street Car Park, beside O Donovan’s Hotel in the centre of Clonakilty."
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14dp"
+                    android:theme="@style/ThemeOverlay.MyTitleText" />
+
+                <TextView
+                    android:id="@+id/titleText3"
+                    android:layout_width="318dp"
+                    android:layout_height="134dp"
+                    android:background="#88272727"
+                    android:paddingTop="30dp"
+                    android:text="Clonakilty is a vibrant, friendly and colourful town surrounded by beautiful beaches and home to a rich food and music culture. A visit to Clonakilty is a must to get a true feel of the relaxed ‘West Cork’ lifestyle."
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14dp"
+                    android:theme="@style/ThemeOverlay.MyTitleText" />
+
+                <TextView
+                    android:id="@+id/titleText4"
+                    android:layout_width="317dp"
+                    android:layout_height="153dp"
+                    android:background="#88272727"
+                    android:paddingTop="30dp"
+                    android:text="A wander through Clonakilty’s buzzing Friday market is a good starting point to understand the town’s food culture. Local organic farmers, cheesemakers, foragers, fishmongers, bakers and coffee roasters jostle shoulder by shoulder with procurers of exotic treats from Europe and the East."
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14dp"
+                    android:theme="@style/ThemeOverlay.MyTitleText" />
+
+                <TextView
+                    android:id="@+id/titleText5"
+                    android:layout_width="315dp"
+                    android:layout_height="139dp"
+                    android:background="#88272727"
+                    android:paddingTop="30dp"
+                    android:text="Clonakilty is a music hub and boasts a great line-up of festivals throughout the year. Rock, pop, traditional sessions in local pubs, Irish and international acts, gigs at world-famous DeBarras Folk Club - Clonakilty has something for all music fans."
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14dp"
+                    android:theme="@style/ThemeOverlay.MyTitleText" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="127dp"
+                    android:layout_weight="1"
+                    android:background="#424242"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/titleText6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="116dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="51dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="44dp"
+                        android:paddingTop="30dp"
+                        android:text="Opening Time: 9pm - 2pm \n Email: contactus@clonmarket.ie \n Phone: 023 --- ---- \n Address: Emmet Square Clonakilty, Co Cork."
+                        android:textAlignment="gravity"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp"
+                        android:theme="@style/ThemeOverlay.MyTitleText" />
+                </RelativeLayout>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>

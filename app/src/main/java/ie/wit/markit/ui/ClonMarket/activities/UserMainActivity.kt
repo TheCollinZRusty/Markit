@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso
 import ie.wit.AdminFragment.*
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import ie.wit.markit.ui.ClonMarket.ui_user.ClonAboutUs.ClonLocation
+import ie.wit.markit.ui.ClonMarket.ui_user.ClonAboutUs.ClonAboutUsFragment
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonLocation.ClonLocationFragment
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonPosts.ClonPostsFragment
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonTrader.ClonTraderFragment
@@ -61,7 +61,7 @@ class UserMainActivity : AppCompatActivity(),
 
         ft = supportFragmentManager.beginTransaction()
 
-        val fragment = ClonPostsFragment.newInstance()
+        val fragment = ClonAboutUsFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
     }
@@ -70,7 +70,7 @@ class UserMainActivity : AppCompatActivity(),
 
         when (item.itemId) {
             R.id.nav_clon_about_us ->
-                navigateTo(ClonLocation.newInstance())
+                navigateTo(ClonAboutUsFragment.newInstance())
             R.id.nav_clon_trader ->
                 navigateTo(ClonTraderFragment.newInstance())
             R.id.nav_Location ->

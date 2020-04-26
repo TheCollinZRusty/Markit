@@ -18,72 +18,31 @@
         android:name="ie.wit.markit.ui.ClonMarket.activities.InitialScreen"
         android:label="InitialScreen" >
         <action
-            android:id="@+id/action_initialScreen_to_loginTraderActivity"
-            app:destination="@id/loginTraderActivity" />
-        <action
             android:id="@+id/action_initialScreen_to_loginUserActivity"
             app:destination="@id/loginUserActivity" />
+        <action
+            android:id="@+id/action_initialScreen_to_loginTraderActivity"
+            app:destination="@id/loginTraderActivity" />
     </activity>
     <action
         android:id="@+id/action_global_splashScreen"
         app:destination="@id/splashScreen" />
     <activity
-        android:id="@+id/loginTraderActivity"
-        android:name="ie.wit.markit.ui.ClonMarket.activities.LoginTraderActivity"
-        android:label="LoginTraderActivity" >
-        <action
-            android:id="@+id/action_loginTraderActivity_to_viewAllPostsFragment"
-            app:destination="@id/viewAllPostsFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_viewMyPostsFragment"
-            app:destination="@id/viewMyPostsFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_addPostFragment"
-            app:destination="@id/addPostFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_addPostFragment2"
-            app:destination="@id/addPostFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_addPostFragment3"
-            app:destination="@id/addPostFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_editPostsFragment"
-            app:destination="@id/editPostsFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_editTraderFragment"
-            app:destination="@id/editTraderFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_editTraderFragment2"
-            app:destination="@id/editTraderFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_addTraderFragment"
-            app:destination="@id/addTraderFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_viewTraderAllFragment"
-            app:destination="@id/viewTraderAllFragment" />
-        <action
-            android:id="@+id/action_loginTraderActivity_to_viewTraderFragment"
-            app:destination="@id/viewTraderFragment" />
-    </activity>
-    <activity
         android:id="@+id/loginUserActivity"
         android:name="ie.wit.markit.ui.ClonMarket.activities.LoginUserActivity"
         android:label="LoginUserActivity" >
         <action
-            android:id="@+id/action_loginUserActivity_to_clonPostsFragment"
-            app:destination="@id/clonPostsFragment" />
-        <action
             android:id="@+id/action_loginUserActivity_to_clonLocation"
             app:destination="@id/clonLocation" />
         <action
-            android:id="@+id/action_loginUserActivity_to_clonLocation2"
-            app:destination="@id/clonLocation" />
-        <action
-            android:id="@+id/action_loginUserActivity_to_clonLocationFragment"
-            app:destination="@id/clonLocationFragment" />
+            android:id="@+id/action_loginUserActivity_to_clonPostsFragment"
+            app:destination="@id/clonPostsFragment" />
         <action
             android:id="@+id/action_loginUserActivity_to_clonTraderFragment"
             app:destination="@id/clonTraderFragment" />
+        <action
+            android:id="@+id/action_loginUserActivity_to_initialScreen"
+            app:destination="@id/initialScreen" />
     </activity>
     <fragment
         android:id="@+id/viewMyPostsFragment"
@@ -97,7 +56,35 @@
     <fragment
         android:id="@+id/addPostFragment"
         android:name="ie.wit.AdminFragment.AddPostFragment"
-        android:label="AddPostFragment" />
+        android:label="AddPostFragment" >
+        <action
+            android:id="@+id/action_addPostFragment_to_addTraderFragment"
+            app:destination="@id/addTraderFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_editPostsFragment"
+            app:destination="@id/editPostsFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_editTraderFragment"
+            app:destination="@id/editTraderFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_editPostsFragment2"
+            app:destination="@id/editPostsFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_editTraderFragment2"
+            app:destination="@id/editTraderFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_viewTraderAllFragment"
+            app:destination="@id/viewTraderAllFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_viewTraderFragment"
+            app:destination="@id/viewTraderFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_viewAllPostsFragment"
+            app:destination="@id/viewAllPostsFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_viewMyPostsFragment"
+            app:destination="@id/viewMyPostsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addTraderFragment"
         android:name="ie.wit.AdminFragment.AddTraderFragment"
@@ -110,11 +97,6 @@
         android:id="@+id/editTraderFragment"
         android:name="ie.wit.AdminFragment.EditTraderFragment"
         android:label="EditTraderFragment" />
-    <fragment
-        android:id="@+id/clonLocationFragment"
-        android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonLocation.ClonLocationFragment"
-        android:label="fragment_clon_location"
-        tools:layout="@layout/fragment_clon_location" />
     <fragment
         android:id="@+id/viewTraderAllFragment"
         android:name="ie.wit.AdminFragment.ViewTraderAllFragment"
@@ -137,4 +119,15 @@
         android:name="ie.wit.markit.ui.ClonMarket.ui_user.ClonTrader.ClonTraderFragment"
         android:label="fragment_clon_trader"
         tools:layout="@layout/fragment_clon_trader" />
+    <activity
+        android:id="@+id/loginTraderActivity"
+        android:name="ie.wit.markit.ui.ClonMarket.activities.LoginTraderActivity"
+        android:label="LoginTraderActivity" >
+        <action
+            android:id="@+id/action_loginTraderActivity_to_addPostFragment"
+            app:destination="@id/addPostFragment" />
+        <action
+            android:id="@+id/action_loginTraderActivity_to_initialScreen"
+            app:destination="@id/initialScreen" />
+    </activity>
 </navigation>

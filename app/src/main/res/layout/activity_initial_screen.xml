@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundgradient"
+    android:background="@drawable/capeclear"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp">
@@ -26,7 +26,7 @@
         android:gravity="center_horizontal"
         android:padding="4dp"
         android:text="Markit"
-        android:textColor="#FFFEFE"
+        android:textColor="@color/colorPrimary"
         android:textSize="30sp" />
 
     <LinearLayout
@@ -59,7 +59,7 @@
         android:layout_marginBottom="110dp"
         android:padding="15dp"
         android:shadowColor="@android:color/transparent"
-        android:text="Sign in as Admin?"
+        android:text="Trader"
         android:textColor="@color/white" />
 
     <TextView
@@ -75,6 +75,6 @@
         android:padding="4dp"
         android:paddingBottom="10dp"
         android:text="Developed by Owen Collins for Mobile App Development 2 SSD3 2020"
-        android:textColor="#444444" />
+        android:textColor="#F7F7F7" />
 
 </LinearLayout>

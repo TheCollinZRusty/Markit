@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
@@ -36,7 +37,7 @@ class LoginTraderActivity : AppCompatActivity(), View.OnClickListener {
             app.currentUser = FirebaseAuth.getInstance().currentUser!!
             app.database = FirebaseDatabase.getInstance().reference
             app.storage = FirebaseStorage.getInstance().reference
-            startActivity<InitialScreen>()
+            startActivity<AdminActivity>()
         }
         else
         // not signed in

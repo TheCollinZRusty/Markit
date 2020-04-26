@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @IgnoreExtraProperties
 @Parcelize
@@ -12,6 +13,7 @@ data class ClonTraderModel(
     var paymenttype: String = "N/A",
     var Title: String = "",
     var Description: String = "",
+    var CurrentTime: String = "",
     var Number: String = "",
     var TraderEmail: String = "",
     var TraderStart: String = "",
