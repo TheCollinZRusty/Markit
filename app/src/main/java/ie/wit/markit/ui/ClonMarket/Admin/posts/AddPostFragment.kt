@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -14,7 +15,8 @@ import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import java.util.HashMap
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AddPostFragment : Fragment(), AnkoLogger {
@@ -53,19 +55,28 @@ class AddPostFragment : Fragment(), AnkoLogger {
 
     fun setButtonListener(layout: View) {
         layout.AddButton.setOnClickListener {
+            val sdf = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
+            val currentTime = sdf.format(Date())
             val post_Title = layout.Post_title.text.toString()
             val description = layout.Description.text.toString()
-            writeNewPost(
-                ClonTraderModel(
-                    Post_Title = post_Title,
-                    PostBody = description,
-                    profilepic = app.userImage.toString(),
-                    isfavourite = favourite,
-                    email = app.currentUser?.email
+            if (post_Title.isNotEmpty() && description.isNotEmpty()) {
+                writeNewPost(
+                    ClonTraderModel(
+                        CurrentTime = currentTime,
+                        Post_Title = post_Title,
+                        PostBody = description,
+                        profilepic = app.userImage.toString(),
+                        isfavourite = favourite,
+                        email = app.currentUser?.email
+                    )
                 )
-            )
+                Toast.makeText(activity,"Post created successfully!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(activity,"Please fill all info!", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
+}
     override fun onResume() {
         super.onResume()
         posttotal(app.currentUser?.uid)

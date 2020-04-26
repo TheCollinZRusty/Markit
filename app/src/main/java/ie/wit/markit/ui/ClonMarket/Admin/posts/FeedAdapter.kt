@@ -47,6 +47,7 @@ class feedAdapter constructor(var clonPosts: ArrayList<ClonTraderModel>,
 
         fun bind(clonTrader: ClonTraderModel, listener: PostListener, reportAll: Boolean) {
             itemView.tag = clonTrader
+            itemView.current_time.text = clonTrader.CurrentTime
             itemView.post_title.text = clonTrader.Post_Title
             itemView.Description.text = clonTrader.PostBody
 

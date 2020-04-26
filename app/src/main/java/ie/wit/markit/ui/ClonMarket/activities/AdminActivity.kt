@@ -20,6 +20,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.admin_activity.*
 import kotlinx.android.synthetic.main.app_bar_home.toolbar
 import kotlinx.android.synthetic.main.nav_header_admin.view.*
+import kotlinx.android.synthetic.main.user_main_activity.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -50,6 +51,9 @@ class AdminActivity : AppCompatActivity(),
 
         //Checking if Google User, upload google profile pic
         checkExistingPhoto(app, this)
+
+        navView.getHeaderView(0).imageView
+            .setOnClickListener { showImagePicker(this, 1) }
 
         ft = supportFragmentManager.beginTransaction()
 
@@ -107,20 +111,14 @@ class AdminActivity : AppCompatActivity(),
         when (requestCode) {
             1 -> {
                 if (data != null) {
-                    writeImageRef(
-                        app,
-                        readImageUri(resultCode, data).toString()
-                    )
+                    writeImageRef(app,readImageUri(resultCode, data).toString())
                     Picasso.get().load(readImageUri(resultCode, data).toString())
                         .resize(180, 180)
                         .transform(CropCircleTransformation())
                         .into(navView.getHeaderView(0).imageView, object : Callback {
                             override fun onSuccess() {
                                 // Drawable is ready
-                                uploadImageView(
-                                    app,
-                                    navView.getHeaderView(0).imageView
-                                )
+                                uploadImageView(app, navView.getHeaderView(0).imageView)
                             }
                             override fun onError(e: Exception) {}
                         })

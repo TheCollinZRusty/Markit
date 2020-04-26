@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso
 import ie.wit.AdminFragment.*
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import ie.wit.markit.ui.ClonMarket.ui_user.ClonAboutUs.ClonLocation
+import ie.wit.markit.ui.ClonMarket.ui_user.ClonAboutUs.ClonAboutUsFragment
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonLocation.ClonLocationFragment
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonPosts.ClonPostsFragment
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonTrader.ClonTraderFragment
@@ -47,11 +47,11 @@ class UserMainActivity : AppCompatActivity(),
         )
         user_drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-//
-//        if(app.currentUser.email != null)
-//            navView.getHeaderView(0).nav_header_email.text = app.currentUser.email
-//        else
-//            navView.getHeaderView(0).nav_header_email.text = "No Email Specified..."
+
+        if(app.currentUser.email != null)
+            nav_view.getHeaderView(0).nav_header_email.text = app.currentUser.email
+        else
+            nav_view.getHeaderView(0).nav_header_email.text = "No Email Specified..."
 
         //Checking if Google User, upload google profile pic
         checkExistingPhoto(app, this)
@@ -61,7 +61,7 @@ class UserMainActivity : AppCompatActivity(),
 
         ft = supportFragmentManager.beginTransaction()
 
-        val fragment = ClonPostsFragment.newInstance()
+        val fragment = ClonAboutUsFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
     }
@@ -70,7 +70,7 @@ class UserMainActivity : AppCompatActivity(),
 
         when (item.itemId) {
             R.id.nav_clon_about_us ->
-                navigateTo(ClonLocation.newInstance())
+                navigateTo(ClonAboutUsFragment.newInstance())
             R.id.nav_clon_trader ->
                 navigateTo(ClonTraderFragment.newInstance())
             R.id.nav_Location ->
@@ -114,10 +114,10 @@ class UserMainActivity : AppCompatActivity(),
                     Picasso.get().load(readImageUri(resultCode, data).toString())
                         .resize(180, 180)
                         .transform(CropCircleTransformation())
-                        .into(navView.getHeaderView(0).imageView, object : Callback {
+                        .into(nav_view.getHeaderView(0).imageView, object : Callback {
                             override fun onSuccess() {
                                 // Drawable is ready
-                                uploadImageView(app, navView.getHeaderView(0).imageView
+                                uploadImageView(app, nav_view.getHeaderView(0).imageView
                                 )
                             }
                             override fun onError(e: Exception) {}

@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ReportFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 import ie.wit.R
@@ -24,10 +27,19 @@ class ViewTraderAllFragment : ViewTraderFragment(),
     ): View? {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_view_traders, container, false)
-        activity?.title = getString(R.string.menu_report_all)
+//        activity?.title = getString(R.string.menu_report_all)
 
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        setSwipeRefresh()
+
+        var query = FirebaseDatabase.getInstance()
+            .reference.child("traders")
+
+        var options = FirebaseRecyclerOptions.Builder<ClonTraderModel>()
+            .setQuery(query, ClonTraderModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.recyclerView.adapter = traderAdapter(options, this)
 
         return root
     }
@@ -38,52 +50,5 @@ class ViewTraderAllFragment : ViewTraderFragment(),
             ViewTraderAllFragment().apply {
                 arguments = Bundle().apply { }
             }
-    }
-
-    override fun setSwipeRefresh() {
-        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                root.swiperefresh.isRefreshing = true
-                getAllUserTraders()
-            }
-        })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getAllUserTraders()
-    }
-
-    fun getAllUserTraders() {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading All Users Donations from Firebase")
-        val traderList = ArrayList<ClonTraderModel>()
-        app.database.child("traders")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Trader error : ${error.message}")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val trader = it.
-                            getValue<ClonTraderModel>(ClonTraderModel::class.java)
-
-                        traderList.add(trader!!)
-                        root.recyclerView.adapter =
-                            traderAdapter(
-                                traderList,
-                                this@ViewTraderAllFragment,
-                                true
-                            )
-                        root.recyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
-
-                        app.database.child("traders").removeEventListener(this)
-                    }
-                }
-            })
     }
 }

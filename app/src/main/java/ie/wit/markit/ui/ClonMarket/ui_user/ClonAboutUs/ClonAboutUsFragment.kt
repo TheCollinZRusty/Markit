@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonLocation.ClonLocationFragment
 
-class ClonLocation : Fragment() {
+class ClonAboutUsFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class ClonLocation : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            ClonLocation().apply {
+            ClonAboutUsFragment().apply {
                 arguments = Bundle().apply { }
             }
     }
