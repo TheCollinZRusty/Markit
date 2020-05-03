@@ -3,13 +3,10 @@ package ie.wit.markit.ui.ClonMarket.Admin.helpers
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -17,7 +14,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,7 +21,6 @@ import com.google.firebase.database.ValueEventListener
 import ie.wit.AdminFragment.ClonTraderModel
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
-import org.jetbrains.anko.info
 
 val REQUEST_PERMISSIONS_REQUEST_CODE = 34
 
@@ -101,10 +96,10 @@ fun setMapMarker(app: MainApp) {
     app.mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 14f))
 }
 
-fun getAllDonations(app: MainApp) {
-    val donationsList = ArrayList<ClonTraderModel>()
+fun getAllPosts(app: MainApp) {
+    val postList = ArrayList<ClonTraderModel>()
 
-    app.database.child("user-donations").child(app.currentUser!!.uid)
+    app.database.child("user-posts").child(app.currentUser!!.uid)
         .addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
@@ -112,20 +107,20 @@ fun getAllDonations(app: MainApp) {
 
                 val children = snapshot.children
                 children.forEach {
-                    val donation = it.
+                    val posts = it.
                         getValue<ClonTraderModel>(ClonTraderModel::class.java)
-                    donationsList.add(donation!!)
+                    postList.add(posts!!)
                 }
-                addMapMarkers(donationsList, app.mMap)
+                addMapMarkers(postList, app.mMap)
             }
         })
 
 }
 
-fun getFavouriteDonations(app: MainApp) {
-    val donationsList = ArrayList<ClonTraderModel>()
+fun getFavouritePosts(app: MainApp) {
+    val postsList = ArrayList<ClonTraderModel>()
 
-    app.database.child("user-donations").child(app.currentUser!!.uid)
+    app.database.child("user-posts").child(app.currentUser!!.uid)
         .orderByChild("isfavourite")
         .equalTo(true)
         .addValueEventListener(object : ValueEventListener {
@@ -135,23 +130,19 @@ fun getFavouriteDonations(app: MainApp) {
 
                 val children = snapshot.children
                 children.forEach {
-                    val donation = it.
+                    val post = it.
                         getValue<ClonTraderModel>(ClonTraderModel::class.java)
-                    donationsList.add(donation!!)
+                    postsList.add(post!!)
                 }
-                addMapMarkers(donationsList, app.mMap)
+                addMapMarkers(postsList, app.mMap)
             }
         })
-
 }
-
 fun addMapMarkers(dl : ArrayList<ClonTraderModel>, map: GoogleMap) {
     dl.forEach {
         map.addMarker(
             MarkerOptions().position(LatLng(it.latitude, it.longitude))
                 .title("${it.Title}")
-//                .icon(
-//                    BitmapDescriptorFactory.fromResource(R.mipmap.ic_homer_map))
         )
     }
 }

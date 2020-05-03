@@ -9,10 +9,14 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
+import ie.wit.fragments.FavouritesFragment
+import ie.wit.markit.ui.ClonMarket.Admin.helpers.checkLocationPermissions
+import ie.wit.markit.ui.ClonMarket.Admin.helpers.setCurrentLocation
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import ie.wit.markit.ui.ClonMarket.activities.InitialScreen
 import ie.wit.markit.ui.ClonMarket.activities.LoginTraderActivity
@@ -36,7 +40,11 @@ class AdminActivity : AppCompatActivity(),
 //        setSupportActionBar(toolbar)
         app = application as MainApp
 
-
+        app.locationClient = LocationServices.getFusedLocationProviderClient(this)
+        if(checkLocationPermissions(this)) {
+            // todo get the current location
+            setCurrentLocation(app)
+        }
         navView.setNavigationItemSelectedListener(this)
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
             R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -75,6 +83,8 @@ class AdminActivity : AppCompatActivity(),
                 navigateTo(AddPostFragment.newInstance())
             R.id.nav_view_post ->
                 navigateTo(ViewMyPostsFragment.newInstance())
+            R.id.nav_favourites ->
+                navigateTo(FavouritesFragment.newInstance())
             R.id.nav_view_all_posts ->
                 navigateTo(ViewAllPostsFragment.newInstance())
             R.id.nav_sign_out -> signOut()

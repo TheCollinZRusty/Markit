@@ -86,7 +86,7 @@ class EditPostsFragment : Fragment(), AnkoLogger {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Trader error : ${error.message}")
                     }
                 })
     }
@@ -101,7 +101,7 @@ class EditPostsFragment : Fragment(), AnkoLogger {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Trader error : ${error.message}")
                     }
                 })
     }

@@ -35,6 +35,16 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/markitlogo" />
+            <ImageView
+                android:id="@+id/imagefavourite"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="28dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.788"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bookmark_icon" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -57,8 +67,10 @@
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/white"
                 android:drawablePadding="10dp"
+                android:hint="Title "
                 android:padding="15dp"
-                android:textColor="@color/white"
+                android:text=" "
+                android:textColor="#616161"
                 android:textColorHighlight="@color/white"
                 android:textColorHint="@color/white" />
 
@@ -66,12 +78,12 @@
                 android:id="@+id/Description"
                 style="@android:style/Widget.DeviceDefault.EditText"
                 android:layout_width="match_parent"
-                android:layout_height="257dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/white"
                 android:drawablePadding="10dp"
                 android:padding="15dp"
-                android:textColor="@color/white"
+                android:textColor="#616161"
                 android:textColorHighlight="@color/white"
                 android:textColorHint="@color/white" />
 

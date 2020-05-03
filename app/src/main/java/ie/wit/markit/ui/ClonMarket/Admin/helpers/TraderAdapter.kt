@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.card_trader.view.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import ie.wit.markit.ui.ClonMarket.ui_user.ClonTrader.ClonTraderFragment
+import kotlinx.android.synthetic.main.fragment_add_post.view.*
 
 interface TraderListener {
     fun onTraderClick(clonTrader: ClonTraderModel)
@@ -40,7 +41,7 @@ class traderAdapter(options: FirebaseRecyclerOptions<ClonTraderModel>,
                 else
                     itemView.setOnClickListener { listener.onTraderClick(clonTrader) }
 
-//                if(clonTrader.isfavourite) itemView.imagefavourite.setImageResource(android.R.drawable.star_big_on)
+                if(clonTrader.isfavourite) itemView.imagefavourite.setImageResource(android.R.drawable.star_big_on)
 
                 if(!clonTrader.profilepic.isEmpty()) {
                     Picasso.get().load(clonTrader.profilepic.toUri())

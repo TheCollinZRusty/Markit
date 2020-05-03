@@ -22,9 +22,7 @@ import com.squareup.picasso.Picasso
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.admin_activity.*
 import kotlinx.android.synthetic.main.admin_activity.navView
-import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_admin.view.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -75,7 +73,7 @@ fun uploadImageView(app: MainApp, imageView: ImageView) {
 
     uploadTask.addOnFailureListener { object : OnFailureListener {
         override fun onFailure(error: Exception) {
-            Log.v("Donation", "uploadTask.exception" + error)
+            Log.v("Trader", "uploadTask.exception" + error)
         }
     }
     }.addOnSuccessListener {
@@ -84,7 +82,7 @@ fun uploadImageView(app: MainApp, imageView: ImageView) {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 app.userImage = task.result!!.toString().toUri()
-                updateAllDonations(app)
+                updateAllTraders(app)
                 writeImageRef(app,app.userImage.toString())
                 Picasso.get().load(app.userImage)
                     .resize(180, 180)
@@ -115,15 +113,15 @@ fun readImageUri(resultCode: Int, data: Intent?): Uri? {
     return uri
 }
 
-fun updateAllDonations(app: MainApp) {
+fun updateAllTraders(app: MainApp) {
     val userId = app.currentUser!!.uid
     val userEmail = app.currentUser!!.email
-    val donationRef = app.database.ref.child("donations")
+    val traderRef = app.database.ref.child("traders")
         .orderByChild("email")
-    val userdonationRef = app.database.ref.child("user-donations")
+    val usertraderRef = app.database.ref.child("user-traders")
         .child(userId).orderByChild("uid")
 
-    donationRef.equalTo(userEmail).addListenerForSingleValueEvent(
+    traderRef.equalTo(userEmail).addListenerForSingleValueEvent(
         object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -133,7 +131,7 @@ fun updateAllDonations(app: MainApp) {
                 }
             }
         })
-    userdonationRef.addListenerForSingleValueEvent(
+    usertraderRef.addListenerForSingleValueEvent(
         object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
             override fun onDataChange(snapshot: DataSnapshot) {
