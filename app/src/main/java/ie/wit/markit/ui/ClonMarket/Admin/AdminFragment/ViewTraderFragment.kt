@@ -90,7 +90,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
                         snapshot.ref.removeValue()
                     }
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Trader error : ${error.message}")
                     }
                 })
     }
@@ -104,7 +104,7 @@ open class ViewTraderFragment : Fragment(), AnkoLogger,
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Trader error : ${error.message}")
                     }
                 })
     }

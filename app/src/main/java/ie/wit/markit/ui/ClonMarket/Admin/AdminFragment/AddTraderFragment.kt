@@ -84,6 +84,7 @@ class AddTraderFragment : Fragment(), AnkoLogger {
                     )
                 )
                 Toast.makeText(activity,"Info entered successfully",Toast.LENGTH_SHORT).show()
+
             }
             else {
                 Toast.makeText(activity,"please fill all info!",Toast.LENGTH_SHORT).show()
@@ -107,7 +108,7 @@ class AddTraderFragment : Fragment(), AnkoLogger {
 
     fun writeNewTrader(clonTrader: ClonTraderModel) {
 //         Create new clonTrader at /clonTraders & /clonTraders/$uid
-        showLoader(loader, "Adding Donation to Firebase")
+        showLoader(loader, "Adding Trader to Firebase")
         info("Firebase DB Reference : $app.database")
         val uid = app.currentUser!!.uid
         val key = app.database.child("traders").push().key
@@ -126,7 +127,7 @@ class AddTraderFragment : Fragment(), AnkoLogger {
     fun tradertotal(userId: String?) {
         eventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                info("Firebase Donation error : ${error.message}")
+                info("Firebase Trader error : ${error.message}")
             }
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children

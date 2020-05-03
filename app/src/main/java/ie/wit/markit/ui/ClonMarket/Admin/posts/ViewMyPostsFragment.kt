@@ -11,13 +11,17 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import kotlinx.android.synthetic.main.fragment_view_posts.view.*
+import kotlinx.android.synthetic.main.fragment_view_posts.view.recyclerView
+import kotlinx.android.synthetic.main.fragment_view_traders.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -25,7 +29,6 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
     PostListener {
 
     lateinit var app: MainApp
-    lateinit var loader : AlertDialog
     lateinit var root: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,15 +45,23 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
         activity?.title = getString(R.string.action_report)
 
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        setSwipeRefresh()
+
+        var query = FirebaseDatabase.getInstance()
+            .reference
+            .child("user-posts").child(app.currentUser.uid)
+
+        var options = FirebaseRecyclerOptions.Builder<ClonTraderModel>()
+            .setQuery(query, ClonTraderModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.recyclerView.adapter = feedAdapter(options, this)
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = root.recyclerView.adapter as feedAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
                 deletePost((viewHolder.itemView.tag as ClonTraderModel).uid)
-                deleteUserPosts(app.currentUser!!.uid,
-                                  (viewHolder.itemView.tag as ClonTraderModel).uid)
+                deleteUserPost(app.currentUser!!.uid,
+                    (viewHolder.itemView.tag as ClonTraderModel).uid)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
@@ -75,20 +86,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
             }
     }
 
-    open fun setSwipeRefresh() {
-        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                root.swiperefresh.isRefreshing = true
-                getAllPosts(app.currentUser!!.uid)
-            }
-        })
-    }
-
-    fun checkSwipeRefresh() {
-        if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
-    }
-
-    fun deleteUserPosts(userId: String, uid: String?) {
+    fun deleteUserPost(userId: String, uid: String?) {
         app.database.child("user-posts").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -96,7 +94,7 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
                         snapshot.ref.removeValue()
                     }
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Post error : ${error.message}")
                     }
                 })
     }
@@ -110,55 +108,15 @@ open class ViewMyPostsFragment : Fragment(), AnkoLogger,
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Post error : ${error.message}")
                     }
                 })
     }
 
-    override fun onPostClick(clonTrader: ClonTraderModel) {
+    override fun onPostClick(post: ClonTraderModel) {
         activity!!.supportFragmentManager.beginTransaction()
-            .replace(R.id.homeFrame, EditPostsFragment.newInstance(clonTrader))
+            .replace(R.id.homeFrame, EditPostsFragment.newInstance(post))
             .addToBackStack(null)
             .commit()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if(this::class == ViewMyPostsFragment::class)
-            getAllPosts(app.currentUser!!.uid)
-    }
-
-    fun getAllPosts(userId: String?) {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading Donations from Firebase")
-        val donationsList = ArrayList<ClonTraderModel>()
-        app.database.child("user-posts").child(userId!!)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Donation error : ${error.message}")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val donation = it.
-                            getValue<ClonTraderModel>(ClonTraderModel::class.java)
-
-                        donationsList.add(donation!!)
-                        root.recyclerView.adapter =
-                            feedAdapter(
-                                donationsList,
-                                this@ViewMyPostsFragment,
-                                false
-                            )
-                        root.recyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
-
-                        app.database.child("user-posts").child(userId)
-                            .removeEventListener(this)
-                    }
-                }
-            })
     }
 }

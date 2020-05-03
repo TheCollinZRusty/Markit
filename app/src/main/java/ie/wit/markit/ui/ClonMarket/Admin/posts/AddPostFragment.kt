@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 import ie.wit.markit.ui.ClonMarket.Admin.main.MainApp
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
+import kotlinx.android.synthetic.main.fragment_add_post.view.Description
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.text.SimpleDateFormat
@@ -40,7 +42,7 @@ class AddPostFragment : Fragment(), AnkoLogger {
         loader = createLoader(activity!!)
         activity?.title = getString(R.string.action_add_trader)
 
-
+        setFavouriteListener(root)
         setButtonListener(root)
         return root;
     }
@@ -59,6 +61,7 @@ class AddPostFragment : Fragment(), AnkoLogger {
             val currentTime = sdf.format(Date())
             val post_Title = layout.Post_title.text.toString()
             val description = layout.Description.text.toString()
+
             if (post_Title.isNotEmpty() && description.isNotEmpty()) {
                 writeNewPost(
                     ClonTraderModel(
@@ -76,7 +79,22 @@ class AddPostFragment : Fragment(), AnkoLogger {
                 Toast.makeText(activity,"Please fill all info!", Toast.LENGTH_SHORT).show()
             }
         }
+
 }
+    fun setFavouriteListener (layout: View) {
+        layout.imagefavourite.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                if (!favourite) {
+                    layout.imagefavourite.setImageResource(R.drawable.bookmark_icon_fill)
+                    favourite = true
+                }
+                else {
+                    layout.imagefavourite.setImageResource(R.drawable.bookmark_icon)
+                    favourite = false
+                }
+            }
+        })
+    }
     override fun onResume() {
         super.onResume()
         posttotal(app.currentUser?.uid)
@@ -92,7 +110,7 @@ class AddPostFragment : Fragment(), AnkoLogger {
 
     fun writeNewPost(clonTrader: ClonTraderModel) {
 //         Create new clonTrader at /clonPosts & /clonPosts/$uid
-        showLoader(loader, "Adding Donation to Firebase")
+        showLoader(loader, "Adding Trader to Firebase")
         info("Firebase DB Reference : $app.database")
         val uid = app.currentUser!!.uid
         val key = app.database.child("posts").push().key

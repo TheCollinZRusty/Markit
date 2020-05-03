@@ -27,6 +27,7 @@ class ClonLocationFragment : Fragment() {
         activity?.title = getString(R.string.action_add_trader)
         return root;
     }
+
     companion object {
         @JvmStatic
         fun newInstance() =

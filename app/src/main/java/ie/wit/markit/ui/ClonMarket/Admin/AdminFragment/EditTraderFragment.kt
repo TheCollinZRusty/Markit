@@ -28,7 +28,7 @@ class EditTraderFragment : Fragment(), AnkoLogger {
         app = activity?.application as MainApp
 
         arguments?.let {
-            editClonTrader = it.getParcelable("editdonation")
+            editClonTrader = it.getParcelable("edittrader")
         }
     }
 
@@ -48,12 +48,8 @@ class EditTraderFragment : Fragment(), AnkoLogger {
         root.EditTraderStart.setText(editClonTrader!!.TraderStart)
         root.EditTraderEnd.setText(editClonTrader!!.TraderEnd)
 
-
-//        root.editMessage.setText(editClonTrader!!.message)
-//        root.editUpvotes.setText(editClonTrader!!.upvotes.toString())
-
         root.btnEdit.setOnClickListener {
-            showLoader(loader, "Updating Donation on Server...")
+            showLoader(loader, "Updating trader on Server...")
             updateTraderData()
             updateTrader(editClonTrader!!.uid, editClonTrader!!)
             updateUsersTrader(app.currentUser!!.uid,
@@ -68,7 +64,7 @@ class EditTraderFragment : Fragment(), AnkoLogger {
         fun newInstance(clonTrader: ClonTraderModel) =
             EditTraderFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("editdonation",clonTrader)
+                    putParcelable("edittrader",clonTrader)
                 }
             }
     }
@@ -80,7 +76,6 @@ class EditTraderFragment : Fragment(), AnkoLogger {
         editClonTrader!!.TraderEmail = root.EditTraderEmail.text.toString()
         editClonTrader!!.TraderStart = root.EditTraderStart.text.toString()
         editClonTrader!!.TraderEnd = root.EditTraderEnd.text.toString()
-//        editClonTrader!!.Upvotes = root.editUpvotes.text.toString().toInt()
     }
 
     fun updateUsersTrader(userId: String, uid: String?, clonTrader: ClonTraderModel) {
@@ -97,7 +92,7 @@ class EditTraderFragment : Fragment(), AnkoLogger {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Trader error : ${error.message}")
                     }
                 })
     }
@@ -112,7 +107,7 @@ class EditTraderFragment : Fragment(), AnkoLogger {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        info("Firebase Donation error : ${error.message}")
+                        info("Firebase Trader error : ${error.message}")
                     }
                 })
     }
